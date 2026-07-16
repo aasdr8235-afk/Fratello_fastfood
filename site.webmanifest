@@ -1,0 +1,15 @@
+{
+  "name": "Fratello Fast Food",
+  "short_name": "Fratello",
+  "icons": [
+    {
+      "src": "food_burger.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0A0A0C",
+  "theme_color": "#0A0A0C",
+  "display": "standalone"
+}
