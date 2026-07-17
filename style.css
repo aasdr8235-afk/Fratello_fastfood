@@ -1170,7 +1170,7 @@ img, video {
 
 .reviews-carousel-track {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
 }
 
@@ -1238,7 +1238,7 @@ img, video {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   grid-auto-rows: 250px;
   gap: 20px;
   margin-top: 40px;
@@ -1866,4 +1866,245 @@ textarea.form-control {
   word-break: break-word !important;
   overflow-wrap: break-word !important;
   white-space: normal !important;
+}
+
+
+
+/* ==========================================================================
+   WHATSAPP & SOCIAL MEDIA SVG ICON ENGINE
+   ========================================================================== */
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF !important;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+}
+.btn-whatsapp:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 18px 35px rgba(37, 211, 102, 0.55);
+}
+
+.social-dock-btn.wa {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF;
+}
+
+.footer-social-badge.wa {
+  background: rgba(37, 211, 102, 0.1);
+  border-color: rgba(37, 211, 102, 0.3);
+  color: #25D366;
+}
+.footer-social-badge.wa:hover {
+  background: #25D366;
+  color: #FFFFFF;
+  border-color: #25D366;
+  transform: translateY(-2px);
+}
+
+.footer-social-links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.footer-social-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--border-light);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-social-badge.insta {
+  background: rgba(225, 48, 108, 0.1);
+  border-color: rgba(225, 48, 108, 0.3);
+  color: #E1306C;
+}
+.footer-social-badge.insta:hover {
+  background: var(--instagram-gradient);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+.footer-social-badge.fb {
+  background: rgba(24, 119, 242, 0.1);
+  border-color: rgba(24, 119, 242, 0.3);
+  color: #1877F2;
+}
+.footer-social-badge.fb:hover {
+  background: var(--facebook-color);
+  color: #FFFFFF;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CREATOR COLLABORATION SECTION & FOOTER CREDIT
+   ========================================================================== */
+.section-collaboration {
+  padding: 80px 0;
+  background: var(--bg-charcoal);
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.collab-card {
+  background: linear-gradient(135deg, rgba(20, 20, 26, 0.95) 0%, rgba(12, 12, 16, 0.98) 100%);
+  border: 1.5px solid var(--border-yellow);
+  border-radius: var(--border-radius-xxl);
+  padding: 48px 56px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 840px;
+  margin: 0 auto;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(246, 193, 45, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.collab-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(246, 193, 45, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.collab-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(246, 193, 45, 0.1);
+  border: 1px solid var(--border-yellow);
+  color: var(--brand-yellow);
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.collab-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.collab-title .yellow {
+  color: var(--brand-yellow);
+  text-shadow: 0 4px 20px var(--brand-yellow-glow);
+}
+
+.collab-text {
+  font-size: 1.05rem;
+  color: var(--text-light);
+  max-width: 600px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.btn-collab {
+  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCB045 100%);
+  color: #FFFFFF !important;
+  font-weight: 800;
+  box-shadow: 0 10px 30px rgba(253, 29, 29, 0.35);
+  padding: 16px 36px;
+  border-radius: 100px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  text-decoration: none;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+}
+
+.btn-collab:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 20px 45px rgba(253, 29, 29, 0.55);
+}
+
+.creator-credit {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+.creator-link {
+  color: var(--brand-yellow);
+  text-decoration: none;
+  font-weight: 800;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.creator-link:hover {
+  color: #FFFFFF;
+  text-shadow: 0 0 10px var(--brand-yellow);
+}
+
+/* ==========================================================================
+   COMPREHENSIVE MOBILE VIEWPORT POLISH (320px - 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .section-collaboration {
+    padding: 60px 0;
+  }
+  
+  .collab-card {
+    padding: 36px 24px;
+    gap: 16px;
+  }
+  
+  .collab-badge {
+    padding: 6px 14px;
+    font-size: 0.75rem;
+  }
+  
+  .collab-text {
+    font-size: 0.95rem;
+  }
+
+  .creator-credit {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn-collab {
+    width: 100%;
+    justify-content: center;
+    padding: 14px 20px;
+  }
+  
+  .footer-social-links {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  
+  .footer-social-badge {
+    padding: 7px 12px;
+    font-size: 0.8rem;
+  }
 }
