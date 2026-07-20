@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
           video.muted = true;
           const playPromise = video.play();
           if (playPromise !== undefined) {
-            playPromise.catch(() => {});
+            playPromise.catch(() => { });
           }
         } else {
           video.pause();
@@ -453,5 +453,273 @@ document.addEventListener('DOMContentLoaded', () => {
       updateLightbox(prevIndex);
     }
   };
+
+
+
+  /* ==========================================================================
+     8 PREMIUM CONVERSION FEATURES JS ENGINE
+     ========================================================================== */
+
+  /* --------------------------------------------------------------------------
+     FEATURE 1: LIVE OPEN/CLOSED STATUS INDICATOR
+     -------------------------------------------------------------------------- */
+  const liveStatusPill = document.getElementById('liveStatusPill');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+
+  if (liveStatusPill && statusText) {
+    const updateRestaurantStatus = () => {
+      const now = new Date();
+      const options = { timeZone: 'Africa/Tunis', hour12: false, hour: '2-digit', minute: '2-digit' };
+      const formatter = new Intl.DateTimeFormat([], options);
+      const parts = formatter.formatToParts(now);
+
+      let hour = 0;
+      let minute = 0;
+      parts.forEach(p => {
+        if (p.type === 'hour') hour = parseInt(p.value, 10);
+        if (p.type === 'minute') minute = parseInt(p.value, 10);
+      });
+
+      const totalMinutes = hour * 60 + minute;
+      const isOpen = totalMinutes >= (10 * 60) || totalMinutes < (2 * 60);
+
+      if (isOpen) {
+        liveStatusPill.classList.remove('is-closed');
+        liveStatusPill.classList.add('is-open');
+        statusText.textContent = 'Open Now • Closes at 02:00 AM';
+      } else {
+        liveStatusPill.classList.remove('is-open');
+        liveStatusPill.classList.add('is-closed');
+        statusText.textContent = 'Closed • Opens at 10:00 AM';
+      }
+    };
+
+    updateRestaurantStatus();
+    setInterval(updateRestaurantStatus, 60000);
+  }
+
+  /* --------------------------------------------------------------------------
+     FEATURE 2: STICKY MOBILE ORDER BAR
+     -------------------------------------------------------------------------- */
+  const stickyMobileBar = document.getElementById('stickyMobileBar');
+  const heroSec = document.getElementById('hero');
+  const siteFooter = document.querySelector('footer');
+
+  if (stickyMobileBar && heroSec && 'IntersectionObserver' in window) {
+    let heroPassed = false;
+    let footerReached = false;
+
+    const updateBarVisibility = () => {
+      if (heroPassed && !footerReached) {
+        stickyMobileBar.classList.add('visible');
+        document.body.classList.add('mobile-order-active');
+      } else {
+        stickyMobileBar.classList.remove('visible');
+        document.body.classList.remove('mobile-order-active');
+      }
+    };
+
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        heroPassed = !entry.isIntersecting;
+        updateBarVisibility();
+      });
+    }, { threshold: 0.1 });
+
+    heroObserver.observe(heroSec);
+
+    if (siteFooter) {
+      const footerObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          footerReached = entry.isIntersecting;
+          updateBarVisibility();
+        });
+      }, { threshold: 0.1 });
+
+      footerObserver.observe(siteFooter);
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     FEATURE 3: INGREDIENT STORYTELLING HOVER CARDS
+     -------------------------------------------------------------------------- */
+  const dishCardsWithIngredients = document.querySelectorAll('#menu .dish-card[data-ingredients]');
+
+  dishCardsWithIngredients.forEach(card => {
+    try {
+      const rawData = card.getAttribute('data-ingredients');
+      const ingredients = JSON.parse(rawData);
+
+      if (Array.isArray(ingredients) && ingredients.length) {
+        const overlay = document.createElement('div');
+        overlay.className = 'ingredient-overlay';
+
+        ingredients.forEach(item => {
+          const itemEl = document.createElement('div');
+          itemEl.className = 'ingredient-item';
+          itemEl.innerHTML = `<i data-lucide="${item.icon}"></i> <span>${item.text}</span>`;
+          overlay.appendChild(itemEl);
+        });
+
+        card.appendChild(overlay);
+        if (window.lucide) {
+          window.lucide.createIcons({ targets: [overlay] });
+        }
+      }
+    } catch (e) {
+      console.warn('Failed to parse dish ingredients JSON', e);
+    }
+  });
+
+  /* --------------------------------------------------------------------------
+     FEATURE 4: SCROLL-DRIVEN CINEMATIC VIDEO TIMELINE
+     -------------------------------------------------------------------------- */
+  const sideVideoCards = document.querySelectorAll('.side-video-card');
+
+  if ('IntersectionObserver' in window && sideVideoCards.length) {
+    const videoTimelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+          entry.target.classList.add('video-active');
+        } else if (entry.intersectionRatio < 0.25) {
+          entry.target.classList.remove('video-active');
+        }
+      });
+    }, {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+      rootMargin: "-20% 0px -20% 0px"
+    });
+
+    sideVideoCards.forEach(card => videoTimelineObserver.observe(card));
+  }
+
+  /* --------------------------------------------------------------------------
+     FEATURE 5: INSTAGRAM MASONRY LAYOUT WITH BLUR-UP LOADING
+     -------------------------------------------------------------------------- */
+  const instaGridImgs = document.querySelectorAll('.insta-grid-item img');
+
+  instaGridImgs.forEach(img => {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      }, { once: true });
+    }
+  });
+
+  /* --------------------------------------------------------------------------
+     FEATURE 6: FLOATING EMBER PARTICLE SYSTEM (HERO OVERLAY)
+     -------------------------------------------------------------------------- */
+  const heroForEmbers = document.getElementById('hero');
+  const emberCanvas = document.getElementById('emberCanvas');
+
+  if (heroForEmbers && emberCanvas) {
+    const ctx = emberCanvas.getContext('2d');
+    let animationFrameId = null;
+    let particles = [];
+    let isHeroVisible = true;
+
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 15 : 40;
+    const emberColors = ['#F6C12D', '#E53935', '#FF8C00'];
+
+    const resizeCanvas = () => {
+      emberCanvas.width = heroForEmbers.clientWidth;
+      emberCanvas.height = heroForEmbers.clientHeight;
+    };
+
+    const createParticle = () => {
+      return {
+        x: Math.random() * emberCanvas.width,
+        y: emberCanvas.height + Math.random() * 20,
+        radius: Math.random() * 2.5 + 1.5,
+        color: emberColors[Math.floor(Math.random() * emberColors.length)],
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: -(Math.random() * 1.5 + 0.5),
+        opacity: Math.random() * 0.4 + 0.4,
+        lifespan: Math.floor(Math.random() * 150 + 150),
+        currentLife: 0
+      };
+    };
+
+    const initParticles = () => {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        const p = createParticle();
+        p.y = Math.random() * emberCanvas.height;
+        p.currentLife = Math.floor(Math.random() * p.lifespan);
+        particles.push(p);
+      }
+    };
+
+    const renderEmbers = () => {
+      if (!isHeroVisible) return;
+      ctx.clearRect(0, 0, emberCanvas.width, emberCanvas.height);
+      ctx.globalCompositeOperation = 'screen';
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.currentLife++;
+
+        const lifeRatio = p.currentLife / p.lifespan;
+        const currentOpacity = Math.max(0, p.opacity * (1 - lifeRatio));
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = currentOpacity;
+        ctx.fill();
+
+        if (p.currentLife >= p.lifespan || p.y < -10) {
+          particles[i] = createParticle();
+        }
+      }
+
+      animationFrameId = requestAnimationFrame(renderEmbers);
+    };
+
+    resizeCanvas();
+    initParticles();
+
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+    }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      const emberObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible) {
+            if (!animationFrameId) renderEmbers();
+          } else {
+            if (animationFrameId) {
+              cancelAnimationFrame(animationFrameId);
+              animationFrameId = null;
+            }
+          }
+        });
+      }, { threshold: 0.1 });
+
+      emberObserver.observe(heroForEmbers);
+    } else {
+      renderEmbers();
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     FEATURE 8: CHEESE PULL BUTTON MICRO-INTERACTION
+     -------------------------------------------------------------------------- */
+  const yellowButtons = document.querySelectorAll('.btn-brand-yellow');
+
+  yellowButtons.forEach(btn => {
+    const text = btn.textContent || '';
+    if (text.includes('Order') || text.includes('Pizza')) {
+      btn.classList.add('has-cheese-pull');
+    }
+  });
 
 });

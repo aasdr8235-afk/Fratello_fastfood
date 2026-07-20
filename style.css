@@ -2791,3 +2791,380 @@ header {
     height: 40px;
   }
 }
+
+
+/* ==========================================================================
+   Fratello 8 Premium Conversion Features CSS Engine
+   GPU-Accelerated Composite Rendering | 60 FPS Fluid Dynamics
+   ========================================================================== */
+
+/* --- FEATURE 1: LIVE OPEN/CLOSED STATUS INDICATOR --- */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(20, 20, 26, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 100px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.status-pill.is-open {
+  border: 1.5px solid #25D366;
+  color: #25D366;
+}
+
+.status-pill.is-closed {
+  border: 1.5px solid #E53935;
+  color: #E53935;
+}
+
+.pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.status-pill.is-open .pulse-dot {
+  background-color: #25D366;
+  box-shadow: 0 0 10px rgba(37, 211, 102, 0.6);
+  animation: pulseGreen 1.8s infinite;
+}
+
+.status-pill.is-closed .pulse-dot {
+  background-color: #E53935;
+  box-shadow: 0 0 8px rgba(229, 57, 53, 0.5);
+}
+
+@keyframes pulseGreen {
+  0% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+}
+
+/* --- FEATURE 2: STICKY MOBILE ORDER BAR --- */
+.sticky-mobile-order-bar {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .sticky-mobile-order-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: #0D0D11;
+    border-top: 1px solid rgba(246, 193, 45, 0.3);
+    padding: 12px 16px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 999;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  .sticky-mobile-order-bar.visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-bar-btn {
+    flex: 1;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 100px;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mobile-bar-btn.btn-call {
+    background: linear-gradient(135deg, #F6C12D, #E0A812);
+    color: #08080A;
+  }
+
+  .mobile-bar-btn.btn-wa {
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: #FFFFFF;
+  }
+
+  body.mobile-order-active {
+    padding-bottom: 80px;
+  }
+}
+
+/* --- FEATURE 3: INGREDIENT STORYTELLING HOVER CARDS --- */
+#menu .dish-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.ingredient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 16px;
+  background: linear-gradient(to top, rgba(8, 8, 10, 0.98) 0%, rgba(8, 8, 10, 0.8) 60%, transparent 100%);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#menu .dish-card:hover .ingredient-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ingredient-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ingredient-item i,
+.ingredient-item svg {
+  color: #F6C12D;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* --- FEATURE 4: SCROLL-DRIVEN CINEMATIC VIDEO TIMELINE --- */
+#videos .container {
+  position: relative;
+}
+
+.side-videos-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.side-video-card {
+  position: sticky;
+  top: 100px;
+  margin-bottom: 40vh;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  transform: scale(0.95);
+  opacity: 0.5;
+  filter: brightness(0.6);
+  border: 2px solid var(--border-light);
+  border-radius: var(--border-radius-xl);
+  overflow: hidden;
+  will-change: transform, opacity, filter;
+}
+
+.side-video-card.video-active {
+  border-color: #F6C12D;
+  box-shadow: 0 20px 60px rgba(246, 193, 45, 0.25);
+  transform: scale(1);
+  opacity: 1;
+  filter: brightness(1);
+}
+
+#featuredVideoCard {
+  position: relative;
+  top: 0;
+  margin-bottom: 48px;
+}
+
+/* --- FEATURE 5: INSTAGRAM MASONRY LAYOUT WITH BLUR-UP LOADING --- */
+.insta-photo-grid {
+  column-count: 3;
+  column-gap: 10px;
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  margin-bottom: 24px;
+  display: block !important;
+}
+
+@media (max-width: 1023.98px) {
+  .insta-photo-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 639.98px) {
+  .insta-photo-grid {
+    column-count: 2;
+  }
+}
+
+.insta-grid-item {
+  break-inside: avoid;
+  margin-bottom: 10px;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #14141A;
+}
+
+.insta-grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: blur(20px);
+  transform: scale(1.1);
+  transition: filter 0.6s ease, transform 0.6s ease;
+  will-change: filter, transform;
+}
+
+.insta-grid-item img.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* --- FEATURE 6: FLOATING EMBER PARTICLE SYSTEM (HERO OVERLAY) --- */
+#hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* --- FEATURE 7: SOCIAL PROOF TICKER MARQUEE --- */
+.review-ticker {
+  height: 56px;
+  background: rgba(246, 193, 45, 0.06);
+  border-top: 1px solid rgba(246, 193, 45, 0.15);
+  border-bottom: 1px solid rgba(246, 193, 45, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: tickerSlide 30s linear infinite;
+  will-change: transform;
+}
+
+.review-ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-right: 24px;
+}
+
+.ticker-item {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ticker-item .stars {
+  color: #F6C12D;
+}
+
+.ticker-sep {
+  color: #F6C12D;
+  font-size: 0.85rem;
+}
+
+@keyframes tickerSlide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- FEATURE 8: CHEESE PULL BUTTON MICRO-INTERACTION --- */
+.btn-brand-yellow.has-cheese-pull {
+  position: relative;
+  overflow: visible !important;
+}
+
+.btn-brand-yellow.has-cheese-pull::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(to bottom, #F6C12D, #E0A812);
+  border-radius: 0 0 6px 6px;
+  transform: translateX(-50%) rotate(0deg);
+  opacity: 0;
+  transition: height 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.3s ease;
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(246, 193, 45, 0.4);
+}
+
+.btn-brand-yellow.has-cheese-pull:hover::after {
+  height: 24px;
+  opacity: 1;
+  animation: cheeseWobble 1.2s infinite ease-in-out alternate;
+}
+
+@keyframes cheeseWobble {
+  0% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-pill.is-open .pulse-dot,
+  .ticker-track,
+  .btn-brand-yellow.has-cheese-pull:hover::after {
+    animation: none !important;
+  }
+}

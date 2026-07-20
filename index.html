@@ -159,6 +159,7 @@
 <main id="main-content">
 <!-- 2. CINEMATIC HERO SECTION -->
 <section class="hero" id="hero">
+<canvas id="emberCanvas" style="position:absolute; inset:0; z-index:1; pointer-events:none;"></canvas>
 <div class="hero-video-bg">
 <video autoplay="" id="heroVideo" loop="" muted="" playsinline="" poster="assets/images/tacos_double.png">
 <source src="assets/videos/reel_fast_food_prep.mp4" type="video/mp4"/>
@@ -169,9 +170,9 @@
 <div class="hero-brand-hero-box">
 <img alt="Fratello Fast Food Hero Logo" class="hero-mascot-logo" decoding="async" src="assets/logo/logo.png"/>
 </div>
-<div class="status-pill">
-<span class="pulse-dot"></span>
-<span class="status-text">ROUTE NATIONALE 1 • HAMMAMET SUD</span>
+<div class="status-pill" id="liveStatusPill">
+<span class="pulse-dot" id="statusDot"></span>
+<span class="status-text" id="statusText">Checking Hours...</span>
 </div>
 <h1 class="hero-headline">
           Fire, Harissa, &amp;<br/>
@@ -200,6 +201,37 @@
 <span>Discover Specialties</span>
 </div>
 </section>
+
+<!-- Feature 7: Social Proof Ticker Marquee -->
+<div class="review-ticker" aria-label="Customer Reviews Ticker">
+  <div class="ticker-track">
+    <div class="ticker-content">
+      <span class="ticker-item"><span class="stars">⭐ 4.8/5</span> — "Best pizza in Hammamet!" — Inès Tessa</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item"><span class="stars">⭐ 5.0/5</span> — "Amazing escalope tacos!" — Ahmed K.</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item"><span class="stars">⭐ 4.9/5</span> — "Fast delivery, hot food!" — Sami B.</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">📍 Route Nationale 1, Hammamet Sud</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">🍕 Artisan Pizza • 🌮 Loaded Tacos • 🔥 Mixed Grill</span>
+      <span class="ticker-sep">✦</span>
+    </div>
+    <div class="ticker-content" aria-hidden="true">
+      <span class="ticker-item"><span class="stars">⭐ 4.8/5</span> — "Best pizza in Hammamet!" — Inès Tessa</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item"><span class="stars">⭐ 5.0/5</span> — "Amazing escalope tacos!" — Ahmed K.</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item"><span class="stars">⭐ 4.9/5</span> — "Fast delivery, hot food!" — Sami B.</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">📍 Route Nationale 1, Hammamet Sud</span>
+      <span class="ticker-sep">✦</span>
+      <span class="ticker-item">🍕 Artisan Pizza • 🌮 Loaded Tacos • 🔥 Mixed Grill</span>
+      <span class="ticker-sep">✦</span>
+    </div>
+  </div>
+</div>
+
 <!-- 3. SPOTLIGHT 1: EDITORIAL TACOS & MAKLOUB -->
 <!-- 3. SPOTLIGHT 1: EDITORIAL WOOD-FIRED PIZZA -->
 <section class="section-editorial-spotlight" id="pizza-spotlight">
@@ -309,94 +341,133 @@
           Sud.</p>
 <div class="dishes-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;">
 <!-- Product Photo 1 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;Handfolded Tortilla&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Fresh Escalope&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Grilled Cheese Sauce&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;Signature Harissa Cream&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/tacos_double.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Tacos Double Escalope" decoding="async" loading="lazy" src="assets/images/tacos_double.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Tacos Double Escalope</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Signature</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Tacos Double Escalope" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 2 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Mixed Chicken Escalope&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Sizzled Ojja Peppers&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;Garlic Mayo Dip&quot;},{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;Crispy Fries Box&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/box_menu.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Plat Mixte Royal Fratello" decoding="async" loading="lazy" src="assets/images/box_menu.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Plat Mixte Royal Fratello</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Specialty</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Plat Mixte Royal Fratello" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
-<!-- Product Photo 3 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+
+<!-- Product Photo 3: Pizza Neptune Fruits de Mer -->
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;48h Fermented Dough&quot;},{&quot;icon&quot;:&quot;fish&quot;,&quot;text&quot;:&quot;Mediterranean Tuna&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Brick Oven Baked&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;House Mozzarella&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/pizza_neptune.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Pizza Neptune Fruits de Mer" decoding="async" loading="lazy" src="assets/images/pizza_neptune.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Pizza Neptune Fruits de Mer</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Seafood</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Pizza Neptune Fruits de Mer" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 4 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;48h Fermented Dough&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Fresh Chicken Escalope&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Brick Oven Baked&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;House Garlic Cream&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/pizzduit.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Pizza Spéciale Fratello" decoding="async" loading="lazy" src="assets/images/pizzduit.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Pizza Spéciale Fratello</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Artisan</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Pizza Spéciale Fratello" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 5 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Sizzling Tomato Harissa&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Tender Meat Cuts&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;Extra Virgin Olive Oil&quot;},{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;Fresh Pasta Platter&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/spaghetti_platter.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Plat Spaghetti Escalope" decoding="async" loading="lazy" src="assets/images/spaghetti_platter.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Plat Spaghetti Escalope</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Classic</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Plat Spaghetti Escalope" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 6 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;48h Artisanal Crust&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;Melting Mozzarella&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Brick Oven Fired&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Smoked Turkey & Tuna&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/pizza_fratello.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Pizza Fratello Supreme" decoding="async" loading="lazy" src="assets/images/pizza_fratello.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Pizza Fratello Supreme</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Popular</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Pizza Fratello Supreme" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 7 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;wheat&quot;,&quot;text&quot;:&quot;Crispy Ciabatta&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;Hand-Breaded Escalope&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;Cheese Melt&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Toasted Panini&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/panini_box.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Panini Box Escalope" decoding="async" loading="lazy" src="assets/images/panini_box.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Panini Box Escalope</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Box Meal</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Panini Box Escalope" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
+
 <!-- Product Photo 8 -->
-<div class="dish-card" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth);">
+<div class="dish-card" data-ingredients="[{&quot;icon&quot;:&quot;store&quot;,&quot;text&quot;:&quot;Hammamet Storefront&quot;},{&quot;icon&quot;:&quot;flame&quot;,&quot;text&quot;:&quot;Fresh Daily Preparation&quot;},{&quot;icon&quot;:&quot;beef&quot;,&quot;text&quot;:&quot;100% Halal Meats&quot;},{&quot;icon&quot;:&quot;droplets&quot;,&quot;text&quot;:&quot;House Special Sauce&quot;}]" style="border-radius: var(--border-radius-xl); overflow: hidden; position: relative; border: 2px solid var(--border-light); background: var(--bg-card); transition: var(--transition-smooth); display: flex; flex-direction: column; justify-content: space-between;">
 <div style="aspect-ratio: 4 / 3; overflow: hidden; position: relative;">
-<img alt="Fratello Authentic Product" decoding="async" loading="lazy" src="assets/images/left.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<img alt="Makloub Special Fratello" decoding="async" loading="lazy" src="assets/images/left.png" style="width: 100%; height: 100%; object-fit: cover;"/>
 </div>
-<div style="padding: 16px; display: flex; justify-content: center;">
-<button class="btn btn-brand-yellow open-order-modal" style="width: 100%; justify-content: center;">
+<div style="padding: 20px 16px 16px; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; justify-content: space-between; align-items: flex-start;">
+<h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 800; color: #FFF; margin: 0;">Makloub Special Fratello</h3>
+<span style="font-family: var(--font-heading); font-size: 0.8rem; font-weight: 800; color: var(--brand-yellow); background: rgba(246,193,45,0.1); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(246,193,45,0.2);">Tunisian Favorite</span>
+</div>
+<button class="btn btn-brand-yellow open-order-modal" data-title="Makloub Special Fratello" style="width: 100%; justify-content: center;">
 <i data-lucide="shopping-bag"></i> Order via WhatsApp
-              </button>
+</button>
 </div>
 </div>
-</div>
+</div></div>
 </div>
 </section>
 <!-- 6. 7 PROMOTIONAL VIDEO REEL EXPERIENCE -->
@@ -789,7 +860,7 @@
 <div class="location-item-icon"><i data-lucide="clock"></i></div>
 <div class="location-item-content">
 <h4>Operating Hours</h4>
-<p>Open Everyday: 10:00 AM – 12:00 AM (Midnight)</p>
+<p>Open Everyday: 10:00 AM – 02:00 AM (Late Night)</p>
 </div>
 </div>
 <div class="location-item">
@@ -858,7 +929,8 @@
 </div>
 </div>
 </article>
-<!-- Snapshot 2: Client Review 2 -->
+
+<!-- Snapshot 2: Ahmed K. -->
 <article class="review-card">
 <div style="margin-bottom:18px; border-radius:var(--border-radius-lg); overflow:hidden; border:1.5px solid var(--border-yellow);">
 <img alt="Fratello Google Guest Feedback Snapshot" decoding="async" loading="lazy" src="assets/images/customer_review_2.png"/>
@@ -871,16 +943,17 @@
 </div>
 </div>
 </article>
-<!-- Snapshot 3: Client Review 3 (Unique Facebook Community Feedback) -->
+
+<!-- Snapshot 3: Sami B. -->
 <article class="review-card">
-<div style="margin-bottom:18px; border-radius:var(--border-radius-lg); overflow:hidden; border:1.5px solid var(--border-yellow); height: 200px;">
-<img alt="Fratello Facebook Verified Rating Snapshot" decoding="async" loading="lazy" src="assets/images/facebook_page_preview.png" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div style="margin-bottom:18px; border-radius:var(--border-radius-lg); overflow:hidden; border:1.5px solid var(--border-yellow);">
+<img alt="Sami B. Customer Feedback Snapshot" decoding="async" loading="lazy" src="assets/images/customer_review_1.png"/>
 </div>
 <div class="reviewer-profile">
-<div class="reviewer-avatar" style="background: #1877F2;">S</div>
+<div class="reviewer-avatar">S</div>
 <div class="reviewer-info">
 <h4>Sami B.</h4>
-<p>Hammamet Visitor • Facebook Verified 5.0★</p>
+<p>Hammamet Visitor • Trip Rating</p>
 </div>
 </div>
 </article>
@@ -1062,7 +1135,7 @@
 <a href="#hero">
 <img alt="Fratello Fast Food Official Mascot Logo" class="footer-logo-img" decoding="async" src="assets/logo/logo.png"/>
 </a>
-<p>Route Nationale 1 (RN1), Hammamet Sud, Tunisia.<br/>Open daily from 10:00 AM to 12:00 AM Midnight.</p>
+<p>Route Nationale 1 (RN1), Hammamet Sud, Tunisia.<br/>Open daily from 10:00 AM to 02:00 AM (Late Night).</p>
 <div class="footer-social-links">
 <a aria-label="Instagram Page" class="footer-social-badge insta" href="https://www.instagram.com/fratello_fast_food.hammamet/" rel="noopener noreferrer" target="_blank">
 <svg aria-hidden="true" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg> Instagram
@@ -1151,5 +1224,18 @@
 <script>
     lucide.createIcons();
   </script>
+
+<!-- Feature 2: Sticky Mobile Order Bar -->
+<div class="sticky-mobile-order-bar" id="stickyMobileBar" aria-label="Quick Mobile Order">
+  <a href="tel:+21623445536" class="mobile-bar-btn btn-call">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+    Call
+  </a>
+  <a href="https://wa.me/21623445536?text=Hello%20Fratello!" target="_blank" rel="noopener noreferrer" class="mobile-bar-btn btn-wa">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+    WhatsApp
+  </a>
+</div>
+
 </body>
 </html>
