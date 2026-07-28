@@ -1,297 +1,543 @@
 /* ==========================================================================
-   Fratello Fast Food - Master JavaScript Engine (100% Pure Vanilla JS)
-   Performance Architecture: 60 FPS Composite-Only Rendering & rAF Ticking
-   IntersectionObserver Active Tracking | Zero Layout Thrashing | Passive Events
+   Fratello Fast Food - Master Interactive & Bilingual Engine
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Lucide Icons
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
 
-  /* --------------------------------------------------------------------------
-     1. Lightweight Toast Notification Engine
-     -------------------------------------------------------------------------- */
-  const toastContainer = document.getElementById('toast-container');
+  /* ------------------------------------------------------------------------
+     Language Switching Engine (French Default | English Toggle)
+     ------------------------------------------------------------------------ */
+  let currentLang = localStorage.getItem('fratello_lang') || 'fr';
 
-  window.showToast = function (message, type = 'success', duration = 3500) {
-    if (!toastContainer) return;
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('fratello_lang', lang);
+    document.documentElement.lang = lang;
 
-    const toast = document.createElement('div');
-    toast.className = `toast toast-${type}`;
-
-    let iconName = 'check-circle';
-    if (type === 'error') iconName = 'alert-circle';
-    if (type === 'info') iconName = 'info';
-
-    toast.innerHTML = `
-      <div class="toast-icon"><i data-lucide="${iconName}"></i></div>
-      <div class="toast-message">${message}</div>
-      <button class="toast-close" aria-label="Close Toast"><i data-lucide="x"></i></button>
-    `;
-
-    toastContainer.appendChild(toast);
-    if (window.lucide) window.lucide.createIcons({ nameAttr: 'data-lucide', attrs: {}, targets: [toast] });
-
-    requestAnimationFrame(() => {
-      toast.classList.add('visible');
+    // Update active class on language toggle buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      if (btn.getAttribute('data-lang') === lang) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
     });
 
-    const closeBtn = toast.querySelector('.toast-close');
-    const dismiss = () => {
-      toast.classList.remove('visible');
-      toast.addEventListener('transitionend', () => {
-        toast.remove();
-      }, { once: true });
-    };
+    // Update title tag
+    const titleEl = document.querySelector('title[data-fr]');
+    if (titleEl) {
+      const newTitle = titleEl.getAttribute(`data-${lang}`);
+      if (newTitle) document.title = newTitle;
+    }
 
-    if (closeBtn) closeBtn.addEventListener('click', dismiss);
-    setTimeout(dismiss, duration);
-  };
-
-  /* --------------------------------------------------------------------------
-     2. Video Playback & Viewport IntersectionObserver
-     -------------------------------------------------------------------------- */
-  const videos = document.querySelectorAll('.observe-video, #heroVideo');
-
-  if ('IntersectionObserver' in window) {
-    const videoObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const video = entry.target;
-        if (entry.isIntersecting) {
-          video.muted = true;
-          const playPromise = video.play();
-          if (playPromise !== undefined) {
-            playPromise.catch(() => { });
-          }
+    // Update all elements with data-fr and data-en attributes
+    const translatableElements = document.querySelectorAll('[data-fr][data-en]');
+    translatableElements.forEach(el => {
+      const isHtml = el.getAttribute('data-is-html') === 'true';
+      const text = el.getAttribute(`data-${lang}`);
+      if (text !== null) {
+        if (isHtml) {
+          el.innerHTML = text;
         } else {
-          video.pause();
+          el.textContent = text;
         }
-      });
-    }, {
-      threshold: 0.2
+      }
     });
 
-    videos.forEach(video => videoObserver.observe(video));
+    // Update aria-labels with data-fr-label / data-en-label
+    const labelElements = document.querySelectorAll('[data-fr-label][data-en-label]');
+    labelElements.forEach(el => {
+      const labelText = el.getAttribute(`data-${lang}-label`);
+      if (labelText) {
+        el.setAttribute('aria-label', labelText);
+      }
+    });
+
+    // Re-initialize Lucide Icons for dynamically replaced content
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    // Refresh status pill in active language
+    updateLiveStatus();
   }
 
-  /* Video Interactive Controls */
-  const videoCards = document.querySelectorAll('.featured-video-card, .side-video-card');
-
-  videoCards.forEach(card => {
-    const video = card.querySelector('video');
-    const muteBtn = card.querySelector('.toggle-mute');
-    const playPauseBtn = card.querySelector('.play-pause');
-
-    if (muteBtn && video) {
-      muteBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        video.muted = !video.muted;
-        const icon = muteBtn.querySelector('i');
-        if (icon) {
-          icon.setAttribute('data-lucide', video.muted ? 'volume-x' : 'volume-2');
-          if (window.lucide) window.lucide.createIcons({ targets: [muteBtn] });
-        }
-      });
-    }
-
-    if (playPauseBtn && video) {
-      playPauseBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (video.paused) {
-          video.play();
-          const icon = playPauseBtn.querySelector('i');
-          if (icon) icon.setAttribute('data-lucide', 'pause');
-        } else {
-          video.pause();
-          const icon = playPauseBtn.querySelector('i');
-          if (icon) icon.setAttribute('data-lucide', 'play');
-        }
-        if (window.lucide) window.lucide.createIcons({ targets: [playPauseBtn] });
-      });
-    }
-  });
-
-  /* --------------------------------------------------------------------------
-     3. 60 FPS Scroll Dynamics & IntersectionObserver Active Section Tracking
-     - Eliminates layout thrashing (0 offsetTop reads in scroll handler)
-     - GPU Compositor scaleX progress bar updates
-     - rAF scroll throttling
-     -------------------------------------------------------------------------- */
-  const scrollProgress = document.getElementById('scroll-progress');
-  const navbar = document.getElementById('navbar');
-  const backToTop = document.getElementById('backToTop');
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-
-  let isTicking = false;
-  let cachedDocHeight = 0;
-
-  const recalculateDocHeight = () => {
-    cachedDocHeight = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
-  };
-
-  recalculateDocHeight();
-  window.addEventListener('resize', recalculateDocHeight, { passive: true });
-
-  const updateScrollState = () => {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    const scrolledRatio = cachedDocHeight > 0 ? scrollTop / cachedDocHeight : 0;
-
-    // GPU Compositor transform (scaleX) - 0 Reflows & 0 Layout Thrashing
-    if (scrollProgress) {
-      scrollProgress.style.transform = `scaleX(${scrolledRatio})`;
-    }
-
-    if (navbar) {
-      navbar.classList.toggle('scrolled', scrollTop > 40);
-    }
-
-    if (backToTop) {
-      backToTop.classList.toggle('visible', scrollTop > 400);
-    }
-
-    isTicking = false;
-  };
-
-  const onScroll = () => {
-    if (!isTicking) {
-      requestAnimationFrame(updateScrollState);
-      isTicking = true;
-    }
-  };
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  updateScrollState();
-
-  // Zero-Reflow Active Section Highlight via IntersectionObserver
-  if ('IntersectionObserver' in window && sections.length) {
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const currentSection = entry.target.getAttribute('id');
-          navLinks.forEach(link => {
-            link.classList.toggle('active', link.getAttribute('href') === `#${currentSection}`);
-          });
-        }
-      });
-    }, {
-      rootMargin: '-20% 0px -65% 0px',
-      threshold: 0
-    });
-
-    sections.forEach(section => sectionObserver.observe(section));
-  }
-
-  if (backToTop) {
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     4. Mobile Navigation Drawer Controls
-     -------------------------------------------------------------------------- */
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileDrawer = document.getElementById('mobile-drawer');
-  const mobileLinks = document.querySelectorAll('.mobile-link');
-
-  const mobileDrawerClose = document.getElementById('mobile-drawer-close');
-
-  const closeMobileMenu = () => {
-    if (mobileDrawer) {
-      mobileDrawer.classList.remove('active');
-      mobileDrawer.setAttribute('aria-hidden', 'true');
-    }
-    if (mobileToggle) {
-      mobileToggle.classList.remove('active');
-    }
-    document.body.style.overflow = '';
-  };
-
-  if (mobileToggle && mobileDrawer) {
-    mobileToggle.addEventListener('click', () => {
-      const isActive = mobileDrawer.classList.toggle('active');
-      mobileToggle.classList.toggle('active', isActive);
-      mobileDrawer.setAttribute('aria-hidden', !isActive);
-      document.body.style.overflow = isActive ? 'hidden' : '';
-    });
-
-    if (mobileDrawerClose) {
-      mobileDrawerClose.addEventListener('click', closeMobileMenu);
-    }
-
-    mobileLinks.forEach(link => {
-      link.addEventListener('click', closeMobileMenu);
-    });
-  }
-
-  /* --------------------------------------------------------------------------
-     5. Tabbed Menu Category Filter System
-     -------------------------------------------------------------------------- */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const dishCards = document.querySelectorAll('.dish-card');
-
-  filterBtns.forEach(btn => {
+  // Language button click handlers
+  document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const category = btn.getAttribute('data-filter');
-
-      dishCards.forEach(card => {
-        const cardCat = card.getAttribute('data-category');
-        if (category === 'all' || cardCat === category) {
-          card.style.display = 'flex';
-          card.style.animation = 'fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  /* --------------------------------------------------------------------------
-     6. Express WhatsApp Order Modal & Contact Form Triggers
-     -------------------------------------------------------------------------- */
-  const orderModal = document.getElementById('orderModal');
-  const closeModal = document.getElementById('closeModal');
-  const orderBtns = document.querySelectorAll('.open-order-modal');
-  const modalTitle = document.getElementById('modalDishTitle');
-  const modalPrice = document.getElementById('modalDishPrice');
-  const expressForm = document.getElementById('expressOrderForm');
-  const contactForm = document.getElementById('contactForm');
-
-  let lastActiveElement = null;
-
-  orderBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      lastActiveElement = document.activeElement;
-      const title = btn.getAttribute('data-title') || 'Custom Order';
-      const price = btn.getAttribute('data-price') || '';
-
-      if (modalTitle) modalTitle.textContent = title;
-      if (modalPrice) modalPrice.textContent = price;
-
-      if (orderModal) {
-        orderModal.classList.add('active');
-        orderModal.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
+      const targetLang = btn.getAttribute('data-lang');
+      if (targetLang && targetLang !== currentLang) {
+        setLanguage(targetLang);
+        showToast(targetLang === 'fr' ? 'Langue modifiée en Français' : 'Language switched to English', 'info');
       }
     });
   });
 
-  const closeOrderModal = () => {
-    if (orderModal) {
-      orderModal.classList.remove('active');
-      orderModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (lastActiveElement) lastActiveElement.focus();
-    }
+  /* ------------------------------------------------------------------------
+     0. Preloader (Loading Screen)
+     ------------------------------------------------------------------------ */
+  const preloader = document.getElementById('preloader');
+  const minDisplayTime = 1200; // 1.2s minimum
+  const startTime = Date.now();
+  let preloaderDismissed = false;
+
+  const dismissPreloader = () => {
+    if (preloaderDismissed) return;
+    preloaderDismissed = true;
+
+    const elapsedTime = Date.now() - startTime;
+    const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+
+    setTimeout(() => {
+      if (preloader) {
+        preloader.classList.add('fade-out');
+        document.body.classList.remove('no-scroll');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 600);
+      }
+    }, remainingTime);
   };
 
-  if (closeModal) closeModal.addEventListener('click', closeOrderModal);
+  if (document.readyState === 'complete') {
+    dismissPreloader();
+  } else {
+    window.addEventListener('load', dismissPreloader);
+    // Safety fallback timeout to prevent preloader lockup
+    setTimeout(dismissPreloader, 3000);
+  }
+
+  /* ------------------------------------------------------------------------
+     1. Scroll Progress Bar & Navbar Scroll State
+     ------------------------------------------------------------------------ */
+  const progressBar = document.getElementById('scroll-progress');
+  const navbar = document.getElementById('main-navbar');
+  const stickyMobileBar = document.getElementById('mobile-order-bar');
+  const siteFooter = document.querySelector('.site-footer');
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if (progressBar) {
+      progressBar.style.width = `${scrollPercent}%`;
+    }
+
+    // Navbar background blur on scroll
+    if (navbar) {
+      if (scrollTop > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }
+
+    // Hide sticky mobile order bar near footer
+    if (stickyMobileBar && siteFooter) {
+      const footerTop = siteFooter.getBoundingClientRect().top;
+      const windowHeight = window.innerHeight;
+
+      if (footerTop <= windowHeight) {
+        stickyMobileBar.classList.add('hidden');
+      } else {
+        stickyMobileBar.classList.remove('hidden');
+      }
+    }
+
+    // Active Section Link Highlighting
+    updateActiveNavLinks();
+  });
+
+  /* ------------------------------------------------------------------------
+     Active Section Link Tracking
+     ------------------------------------------------------------------------ */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.desktop-nav-links .nav-link, .drawer-links .drawer-link');
+
+  function updateActiveNavLinks() {
+    const scrollY = window.scrollY;
+
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop - 120;
+      const sectionHeight = section.offsetHeight;
+      const sectionId = section.getAttribute('id');
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${sectionId}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     2. Toast Notification System
+     ------------------------------------------------------------------------ */
+  window.showToast = function(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast ${type === 'error' ? 'toast-error' : ''}`;
+    toast.innerHTML = `
+      <i data-lucide="${type === 'error' ? 'alert-circle' : 'check-circle-2'}" style="color: var(--brand-yellow);"></i>
+      <span>${message}</span>
+    `;
+
+    container.appendChild(toast);
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+
+    setTimeout(() => {
+      toast.classList.add('fade-out');
+      setTimeout(() => {
+        toast.remove();
+      }, 300);
+    }, 3000);
+  };
+
+  /* ------------------------------------------------------------------------
+     3. Mobile Navigation Drawer
+     ------------------------------------------------------------------------ */
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const drawerCloseBtn = document.getElementById('drawer-close');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const drawerOverlay = document.getElementById('drawer-overlay');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
+
+  function openDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.add('open');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('no-scroll');
+      if (stickyMobileBar) stickyMobileBar.classList.add('hidden');
+    }
+  }
+
+  function closeDrawer() {
+    if (mobileDrawer) {
+      mobileDrawer.classList.remove('open');
+      mobileDrawer.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('no-scroll');
+      if (stickyMobileBar) stickyMobileBar.classList.remove('hidden');
+    }
+  }
+
+  if (hamburgerBtn) hamburgerBtn.addEventListener('click', openDrawer);
+  if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
+  if (drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  /* ------------------------------------------------------------------------
+     5. Live Status Pill Logic (Tunisia Time: UTC+1, 10:00 AM - 02:00 AM)
+     ------------------------------------------------------------------------ */
+  function updateLiveStatus() {
+    const statusPill = document.getElementById('live-status-pill');
+    const statusText = document.getElementById('status-text');
+
+    if (!statusPill || !statusText) return;
+
+    try {
+      const options = { timeZone: 'Africa/Tunis', hour: 'numeric', hour12: false };
+      const tunisiaHourStr = new Intl.DateTimeFormat([], options).format(new Date());
+      const hour = intParse(tunisiaHourStr);
+
+      const isOpen = (hour >= 10 || hour < 2);
+
+      if (isOpen) {
+        statusPill.classList.remove('closed');
+        statusText.textContent = currentLang === 'fr' 
+          ? 'Ouvert — Commandez maintenant' 
+          : 'Open Now — Order for Delivery or Pickup';
+      } else {
+        statusPill.classList.add('closed');
+        statusText.textContent = currentLang === 'fr' 
+          ? 'Fermé — Ouvre à 10h00' 
+          : 'Closed Now — Opens at 10:00 AM';
+      }
+    } catch (e) {
+      statusText.textContent = currentLang === 'fr' 
+        ? 'Ouvert 10h00 – 02h00' 
+        : 'Open Daily 10:00 AM – 02:00 AM';
+    }
+  }
+
+  function intParse(val) {
+    const num = parseInt(val, 10);
+    return isNaN(num) ? 12 : num;
+  }
+
+  updateLiveStatus();
+  setInterval(updateLiveStatus, 60000);
+
+  /* ------------------------------------------------------------------------
+     5B. Hero Floating Embers Canvas Effect
+     ------------------------------------------------------------------------ */
+  const canvas = document.getElementById('emberCanvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      if (canvas.parentElement) {
+        canvas.width = canvas.parentElement.offsetWidth;
+        canvas.height = canvas.parentElement.offsetHeight;
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Ember {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * (canvas.width || 800);
+        this.y = (canvas.height || 600) + Math.random() * 20;
+        this.size = Math.random() * 3 + 1;
+        this.speedY = Math.random() * 1.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.8;
+        this.opacity = Math.random() * 0.7 + 0.3;
+        this.color = Math.random() > 0.3 ? '#F6C12D' : '#ff4d4d';
+      }
+
+      update() {
+        this.y -= this.speedY;
+        this.x += this.speedX;
+        this.opacity -= 0.003;
+
+        if (this.y < -10 || this.opacity <= 0) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        ctx.fillStyle = this.color;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < 40; i++) {
+      particles.push(new Ember());
+    }
+
+    function animateEmbers() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateEmbers);
+    }
+
+    animateEmbers();
+  }
+
+  /* ------------------------------------------------------------------------
+     5C. Hero Background Video Readiness & Fallback Engine
+     ------------------------------------------------------------------------ */
+  const heroVideoBg = document.querySelector('.hero-video-bg');
+  const heroVideo = document.querySelector('.hero-video');
+
+  if (heroVideoBg && heroVideo) {
+    let videoLoaded = false;
+    const posterPath = heroVideo.getAttribute('poster') || 'assets/images/tacos_double.png';
+
+    const triggerFallback = () => {
+      if (videoLoaded) return;
+      heroVideo.style.display = 'none';
+      heroVideoBg.style.backgroundImage = `url('${posterPath}')`;
+    };
+
+    const markVideoReady = () => {
+      videoLoaded = true;
+      heroVideo.classList.add('video-ready');
+      heroVideo.style.opacity = '1';
+    };
+
+    heroVideo.addEventListener('loadeddata', markVideoReady);
+    heroVideo.addEventListener('canplay', markVideoReady);
+    heroVideo.addEventListener('playing', markVideoReady);
+
+    heroVideo.addEventListener('error', triggerFallback);
+
+    // 3000ms mobile fallback check
+    setTimeout(() => {
+      if (!videoLoaded || heroVideo.readyState < 2) {
+        triggerFallback();
+      }
+    }, 3000);
+  }
+
+  /* ------------------------------------------------------------------------
+     10. VIDEO SHOWCASE ENGINE (VERBATIM SPECIFICATION SECTION 3.3)
+     ------------------------------------------------------------------------ */
+  function initVideoCard(wrapper) {
+    const video = wrapper.querySelector('.video-element');
+    const playOverlay = wrapper.querySelector('.video-play-overlay');
+    const playBtn = wrapper.querySelector('.video-play-btn');
+    const muteBtn = wrapper.querySelector('.video-mute-btn');
+    const poster = wrapper.querySelector('.video-poster');
+
+    if (!video) return;
+
+    // Ensure poster is hidden once video can play (but keep it as fallback)
+    video.addEventListener('canplay', () => {
+      if (poster) {
+        poster.style.opacity = '0';
+        poster.style.transition = 'opacity 0.4s ease';
+      }
+    });
+
+    // If video errors, keep poster visible and hide play button
+    video.addEventListener('error', () => {
+      if (poster) poster.style.opacity = '1';
+      if (playOverlay) playOverlay.style.display = 'none';
+      console.warn('Video failed to load:', video.currentSrc);
+    });
+
+    // Toggle play/pause on button click OR video click
+    const togglePlay = () => {
+      if (video.paused) {
+        video.play().catch(() => {});
+        if (playOverlay) playOverlay.classList.add('is-playing');
+      } else {
+        video.pause();
+        if (playOverlay) playOverlay.classList.remove('is-playing');
+      }
+    };
+
+    if (playBtn) {
+      playBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        togglePlay();
+      });
+    }
+    
+    // Clicking the video itself also toggles
+    video.addEventListener('click', togglePlay);
+
+    // Mute toggle
+    if (muteBtn) {
+      muteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        video.muted = !video.muted;
+        const icon = muteBtn.querySelector('i, svg');
+        if (icon) {
+          icon.setAttribute('data-lucide', video.muted ? 'volume-x' : 'volume-2');
+          if (window.lucide) window.lucide.createIcons();
+        }
+      });
+    }
+  }
+
+  // Intersection Observer: autoplay in viewport, pause out of viewport
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const video = entry.target.querySelector('.video-element');
+      const overlay = entry.target.querySelector('.video-play-overlay');
+      if (!video) return;
+
+      if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
+        video.play().catch(() => {});
+        if (overlay) overlay.classList.add('is-playing');
+      } else {
+        video.pause();
+        video.currentTime = 0; // reset to poster frame
+        if (overlay) overlay.classList.remove('is-playing');
+      }
+    });
+  }, { threshold: [0, 0.35, 1] });
+
+  document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+    initVideoCard(wrapper);
+    videoObserver.observe(wrapper);
+  });
+
+  /* ------------------------------------------------------------------------
+     11. Populate Instagram 45 Photo Grid
+     ------------------------------------------------------------------------ */
+  const instaGridContainer = document.querySelector('.insta-grid-container');
+  if (instaGridContainer) {
+    let gridHTML = '';
+    for (let i = 1; i <= 45; i++) {
+      const numStr = i < 10 ? `0${i}` : `${i}`;
+      const imgPath = `assets/images/instagram_feed/insta_${numStr}.jpg`;
+      const likesCount = Math.floor(Math.random() * 300) + 120;
+
+      gridHTML += `
+        <div class="insta-grid-item gallery-item" data-src="${imgPath}" data-caption="Fratello Instagram Post #${i}">
+          <img src="${imgPath}" alt="Instagram feed photo ${i}" loading="lazy">
+          <div class="insta-hover-overlay">
+            <i data-lucide="heart" style="width: 18px; height: 18px; fill: #fff;"></i>
+            <span>${likesCount}</span>
+          </div>
+        </div>
+      `;
+    }
+    instaGridContainer.innerHTML = gridHTML;
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }
+
+  /* ------------------------------------------------------------------------
+     Modals: Express Order Modal (NO PRICES)
+     ------------------------------------------------------------------------ */
+  const orderModal = document.getElementById('order-modal');
+  const modalCloseBtn = document.getElementById('modal-close');
+  const modalDishTitle = document.getElementById('modal-dish-title');
+  const expressForm = document.getElementById('express-order-form');
+
+  let currentSelectedDish = 'Commande Express';
+
+  document.querySelectorAll('.open-order-modal').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const title = btn.getAttribute('data-title') || 'Plat Spécial';
+      currentSelectedDish = title;
+
+      if (modalDishTitle) {
+        modalDishTitle.textContent = currentLang === 'fr' ? `Commande: ${title}` : `Order: ${title}`;
+      }
+
+      if (orderModal) {
+        orderModal.classList.add('open');
+        orderModal.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+
+  function closeOrderModal() {
+    if (orderModal) {
+      orderModal.classList.remove('open');
+      orderModal.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeOrderModal);
 
   if (orderModal) {
     orderModal.addEventListener('click', (e) => {
@@ -302,107 +548,96 @@ document.addEventListener('DOMContentLoaded', () => {
   if (expressForm) {
     expressForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const title = modalTitle ? modalTitle.textContent : 'Item';
-      const qty = document.getElementById('orderQty').value || 1;
-      const sauce = document.getElementById('sauceChoice').value || 'Standard';
+      const sauceSelect = document.getElementById('order-sauce');
+      const sauceOption = sauceSelect.options[sauceSelect.selectedIndex];
+      const sauce = sauceOption.getAttribute(`data-${currentLang}`) || sauceSelect.value;
 
-      const whatsappMsg = `Hello Fratello Fast Food! I would like to order:\n- Item: ${title}\n- Quantity: ${qty}\n- Sauce: ${sauce}\n\nLocation: Hammamet Sud`;
-      const encodedMsg = encodeURIComponent(whatsappMsg);
+      const qty = document.getElementById('order-qty').value;
+      const address = document.getElementById('order-address').value;
+
+      // Order submission with NO prices, formatted in active language
+      let messageText = currentLang === 'fr' 
+        ? `Commande: ${currentSelectedDish}\nSauce: ${sauce}\nQté: ${qty}`
+        : `Order: ${currentSelectedDish}\nSauce: ${sauce}\nQty: ${qty}`;
+
+      if (address) {
+        messageText += currentLang === 'fr' ? `\nAdresse/Notes: ${address}` : `\nAddress/Notes: ${address}`;
+      }
+
+      const whatsappURL = `https://wa.me/21623445536?text=${encodeURIComponent(messageText)}`;
+      window.open(whatsappURL, '_blank');
 
       closeOrderModal();
-      window.showToast('Redirecting to WhatsApp Order...', 'success');
-      setTimeout(() => {
-        window.open(`https://wa.me/21623445536?text=${encodedMsg}`, '_blank');
-      }, 400);
+      showToast(currentLang === 'fr' ? 'Redirection vers WhatsApp pour envoyer votre commande !' : 'Redirecting to WhatsApp to send your order!', 'info');
     });
   }
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      window.showToast('Thank you! Your order inquiry has been submitted.', 'success', 4000);
-      contactForm.reset();
-    });
-  }
+  /* ------------------------------------------------------------------------
+     Modals: Lightbox Gallery Modal
+     ------------------------------------------------------------------------ */
+  const lightboxModal = document.getElementById('lightbox-modal');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
 
-  /* --------------------------------------------------------------------------
-     7. Enhanced Lightbox Carousel Modal with GPU Transitions & Touch Gestures
-     -------------------------------------------------------------------------- */
-  const galleryItems = Array.from(document.querySelectorAll('.gallery-item[data-src]'));
-  const lightboxModal = document.getElementById('lightboxModal');
-  const lightboxImg = document.getElementById('lightboxImg');
-  const lightboxCaption = document.getElementById('lightboxCaption');
-  const closeLightbox = document.getElementById('closeLightbox');
-  const lightboxPrev = document.getElementById('lightboxPrev');
-  const lightboxNext = document.getElementById('lightboxNext');
-
+  let galleryItems = [];
   let currentGalleryIndex = 0;
 
-  const updateLightbox = (index) => {
-    if (!galleryItems.length || index < 0 || index >= galleryItems.length) return;
-    currentGalleryIndex = index;
-    const targetItem = galleryItems[currentGalleryIndex];
-    const src = targetItem.getAttribute('data-src');
-    const imgAlt = targetItem.querySelector('img')?.getAttribute('alt') || 'Fratello Food Photo';
+  function refreshGalleryItems() {
+    galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+  }
 
-    if (lightboxImg) {
-      lightboxImg.style.opacity = '0';
-      lightboxImg.style.transform = 'scale(0.96)';
-      setTimeout(() => {
-        lightboxImg.src = src;
-        lightboxImg.alt = imgAlt;
-        lightboxImg.style.opacity = '1';
-        lightboxImg.style.transform = 'scale(1)';
-      }, 120);
+  refreshGalleryItems();
+
+  document.body.addEventListener('click', (e) => {
+    const item = e.target.closest('.gallery-item');
+    if (item) {
+      refreshGalleryItems();
+      currentGalleryIndex = galleryItems.indexOf(item);
+      if (currentGalleryIndex !== -1) {
+        openLightbox(currentGalleryIndex);
+      }
     }
-
-    if (lightboxCaption) {
-      lightboxCaption.textContent = `${imgAlt} (${currentGalleryIndex + 1} / ${galleryItems.length})`;
-    }
-  };
-
-  const openLightbox = (index) => {
-    lastActiveElement = document.activeElement;
-    updateLightbox(index);
-    if (lightboxModal) {
-      lightboxModal.classList.add('active');
-      lightboxModal.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-  };
-
-  const closeLightboxModal = () => {
-    if (lightboxModal) {
-      lightboxModal.classList.remove('active');
-      lightboxModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      if (lastActiveElement) lastActiveElement.focus();
-    }
-  };
-
-  galleryItems.forEach((item, index) => {
-    item.addEventListener('click', () => {
-      openLightbox(index);
-    });
   });
 
-  if (closeLightbox) closeLightbox.addEventListener('click', closeLightboxModal);
+  function openLightbox(index) {
+    if (!lightboxModal || !galleryItems[index]) return;
 
-  if (lightboxPrev) {
-    lightboxPrev.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const prevIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
-      updateLightbox(prevIndex);
-    });
+    const item = galleryItems[index];
+    const src = item.getAttribute('data-src') || item.querySelector('img')?.src;
+    const caption = item.getAttribute('data-caption') || item.querySelector('img')?.alt || 'Fratello Food Photography';
+
+    if (lightboxImg) lightboxImg.src = src;
+    if (lightboxCaption) lightboxCaption.textContent = caption;
+
+    lightboxModal.classList.add('open');
+    lightboxModal.setAttribute('aria-hidden', 'false');
   }
 
-  if (lightboxNext) {
-    lightboxNext.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const nextIndex = (currentGalleryIndex + 1) % galleryItems.length;
-      updateLightbox(nextIndex);
-    });
+  function closeLightboxModal() {
+    if (lightboxModal) {
+      lightboxModal.classList.remove('open');
+      lightboxModal.setAttribute('aria-hidden', 'true');
+    }
   }
+
+  function showPrevImage() {
+    if (galleryItems.length === 0) return;
+    currentGalleryIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+  }
+
+  function showNextImage() {
+    if (galleryItems.length === 0) return;
+    currentGalleryIndex = (currentGalleryIndex + 1) % galleryItems.length;
+    openLightbox(currentGalleryIndex);
+  }
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightboxModal);
+  if (lightboxPrev) lightboxPrev.addEventListener('click', showPrevImage);
+  if (lightboxNext) lightboxNext.addEventListener('click', showNextImage);
 
   if (lightboxModal) {
     lightboxModal.addEventListener('click', (e) => {
@@ -410,316 +645,41 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Keyboard navigation & Escape key support
+  // Keyboard navigation for Lightbox & Escape for Modals
   document.addEventListener('keydown', (e) => {
-    if (lightboxModal && lightboxModal.classList.contains('active')) {
-      if (e.key === 'Escape') closeLightboxModal();
-      if (e.key === 'ArrowLeft') {
-        const prevIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
-        updateLightbox(prevIndex);
-      }
-      if (e.key === 'ArrowRight') {
-        const nextIndex = (currentGalleryIndex + 1) % galleryItems.length;
-        updateLightbox(nextIndex);
-      }
-    } else if (orderModal && orderModal.classList.contains('active')) {
-      if (e.key === 'Escape') closeOrderModal();
+    if (e.key === 'Escape') {
+      closeOrderModal();
+      closeLightboxModal();
+      closeDrawer();
+    } else if (lightboxModal && lightboxModal.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') showPrevImage();
+      if (e.key === 'ArrowRight') showNextImage();
     }
   });
 
-  // Passive Touch Swipe Gesture Support for Mobile Lightbox
-  let touchStartX = 0;
-  let touchEndX = 0;
+  /* ------------------------------------------------------------------------
+     15. Contact Form Handler
+     ------------------------------------------------------------------------ */
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value;
+      const phone = document.getElementById('contact-phone').value;
+      const message = document.getElementById('contact-message').value;
 
-  if (lightboxModal) {
-    lightboxModal.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
+      const text = currentLang === 'fr'
+        ? `Bonjour Fratello Fast Food !\n\nNom: ${name}\nTéléphone: ${phone}\nDemande: ${message}`
+        : `Hello Fratello Fast Food!\n\nName: ${name}\nPhone: ${phone}\nInquiry: ${message}`;
+      
+      const url = `https://wa.me/21623445536?text=${encodeURIComponent(text)}`;
 
-    lightboxModal.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    }, { passive: true });
-  }
-
-  const handleSwipe = () => {
-    const swipeThreshold = 50;
-    if (touchEndX < touchStartX - swipeThreshold) {
-      const nextIndex = (currentGalleryIndex + 1) % galleryItems.length;
-      updateLightbox(nextIndex);
-    }
-    if (touchEndX > touchStartX + swipeThreshold) {
-      const prevIndex = (currentGalleryIndex - 1 + galleryItems.length) % galleryItems.length;
-      updateLightbox(prevIndex);
-    }
-  };
-
-
-
-  /* ==========================================================================
-     8 PREMIUM CONVERSION FEATURES JS ENGINE
-     ========================================================================== */
-
-  /* --------------------------------------------------------------------------
-     FEATURE 1: LIVE OPEN/CLOSED STATUS INDICATOR
-     -------------------------------------------------------------------------- */
-  const liveStatusPill = document.getElementById('liveStatusPill');
-  const statusDot = document.getElementById('statusDot');
-  const statusText = document.getElementById('statusText');
-
-  if (liveStatusPill && statusText) {
-    const updateRestaurantStatus = () => {
-      const now = new Date();
-      const options = { timeZone: 'Africa/Tunis', hour12: false, hour: '2-digit', minute: '2-digit' };
-      const formatter = new Intl.DateTimeFormat([], options);
-      const parts = formatter.formatToParts(now);
-
-      let hour = 0;
-      let minute = 0;
-      parts.forEach(p => {
-        if (p.type === 'hour') hour = parseInt(p.value, 10);
-        if (p.type === 'minute') minute = parseInt(p.value, 10);
-      });
-
-      const totalMinutes = hour * 60 + minute;
-      const isOpen = totalMinutes >= (10 * 60) || totalMinutes < (2 * 60);
-
-      if (isOpen) {
-        liveStatusPill.classList.remove('is-closed');
-        liveStatusPill.classList.add('is-open');
-        statusText.textContent = 'Open Now • Closes at 02:00 AM';
-      } else {
-        liveStatusPill.classList.remove('is-open');
-        liveStatusPill.classList.add('is-closed');
-        statusText.textContent = 'Closed • Opens at 10:00 AM';
-      }
-    };
-
-    updateRestaurantStatus();
-    setInterval(updateRestaurantStatus, 60000);
-  }
-
-  /* --------------------------------------------------------------------------
-     FEATURE 2: STICKY MOBILE ORDER BAR
-     -------------------------------------------------------------------------- */
-  const stickyMobileBar = document.getElementById('stickyMobileBar');
-  const heroSec = document.getElementById('hero');
-  const siteFooter = document.querySelector('footer');
-
-  if (stickyMobileBar && heroSec && 'IntersectionObserver' in window) {
-    let heroPassed = false;
-    let footerReached = false;
-
-    const updateBarVisibility = () => {
-      if (heroPassed && !footerReached) {
-        stickyMobileBar.classList.add('visible');
-        document.body.classList.add('mobile-order-active');
-      } else {
-        stickyMobileBar.classList.remove('visible');
-        document.body.classList.remove('mobile-order-active');
-      }
-    };
-
-    const heroObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        heroPassed = !entry.isIntersecting;
-        updateBarVisibility();
-      });
-    }, { threshold: 0.1 });
-
-    heroObserver.observe(heroSec);
-
-    if (siteFooter) {
-      const footerObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          footerReached = entry.isIntersecting;
-          updateBarVisibility();
-        });
-      }, { threshold: 0.1 });
-
-      footerObserver.observe(siteFooter);
-    }
-  }
-
-  /* --------------------------------------------------------------------------
-     FEATURE 3: INGREDIENT STORYTELLING HOVER CARDS
-     -------------------------------------------------------------------------- */
-  const dishCardsWithIngredients = document.querySelectorAll('#menu .dish-card[data-ingredients]');
-
-  dishCardsWithIngredients.forEach(card => {
-    try {
-      const rawData = card.getAttribute('data-ingredients');
-      const ingredients = JSON.parse(rawData);
-
-      if (Array.isArray(ingredients) && ingredients.length) {
-        const overlay = document.createElement('div');
-        overlay.className = 'ingredient-overlay';
-
-        ingredients.forEach(item => {
-          const itemEl = document.createElement('div');
-          itemEl.className = 'ingredient-item';
-          itemEl.innerHTML = `<i data-lucide="${item.icon}"></i> <span>${item.text}</span>`;
-          overlay.appendChild(itemEl);
-        });
-
-        card.appendChild(overlay);
-        if (window.lucide) {
-          window.lucide.createIcons({ targets: [overlay] });
-        }
-      }
-    } catch (e) {
-      console.warn('Failed to parse dish ingredients JSON', e);
-    }
-  });
-
-  /* --------------------------------------------------------------------------
-     FEATURE 4: SCROLL-DRIVEN CINEMATIC VIDEO TIMELINE
-     -------------------------------------------------------------------------- */
-  const sideVideoCards = document.querySelectorAll('.side-video-card');
-
-  if ('IntersectionObserver' in window && sideVideoCards.length) {
-    const videoTimelineObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
-          entry.target.classList.add('video-active');
-        } else if (entry.intersectionRatio < 0.25) {
-          entry.target.classList.remove('video-active');
-        }
-      });
-    }, {
-      threshold: [0, 0.25, 0.5, 0.75, 1],
-      rootMargin: "-20% 0px -20% 0px"
+      window.open(url, '_blank');
+      showToast(currentLang === 'fr' ? 'Demande envoyée via WhatsApp !' : 'Inquiry sent via WhatsApp!', 'info');
+      contactForm.reset();
     });
-
-    sideVideoCards.forEach(card => videoTimelineObserver.observe(card));
   }
 
-  /* --------------------------------------------------------------------------
-     FEATURE 5: INSTAGRAM MASONRY LAYOUT WITH BLUR-UP LOADING
-     -------------------------------------------------------------------------- */
-  const instaGridImgs = document.querySelectorAll('.insta-grid-item img');
-
-  instaGridImgs.forEach(img => {
-    if (img.complete) {
-      img.classList.add('loaded');
-    } else {
-      img.addEventListener('load', () => {
-        img.classList.add('loaded');
-      }, { once: true });
-    }
-  });
-
-  /* --------------------------------------------------------------------------
-     FEATURE 6: FLOATING EMBER PARTICLE SYSTEM (HERO OVERLAY)
-     -------------------------------------------------------------------------- */
-  const heroForEmbers = document.getElementById('hero');
-  const emberCanvas = document.getElementById('emberCanvas');
-
-  if (heroForEmbers && emberCanvas) {
-    const ctx = emberCanvas.getContext('2d');
-    let animationFrameId = null;
-    let particles = [];
-    let isHeroVisible = true;
-
-    const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 15 : 40;
-    const emberColors = ['#F6C12D', '#E53935', '#FF8C00'];
-
-    const resizeCanvas = () => {
-      emberCanvas.width = heroForEmbers.clientWidth;
-      emberCanvas.height = heroForEmbers.clientHeight;
-    };
-
-    const createParticle = () => {
-      return {
-        x: Math.random() * emberCanvas.width,
-        y: emberCanvas.height + Math.random() * 20,
-        radius: Math.random() * 2.5 + 1.5,
-        color: emberColors[Math.floor(Math.random() * emberColors.length)],
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: -(Math.random() * 1.5 + 0.5),
-        opacity: Math.random() * 0.4 + 0.4,
-        lifespan: Math.floor(Math.random() * 150 + 150),
-        currentLife: 0
-      };
-    };
-
-    const initParticles = () => {
-      particles = [];
-      for (let i = 0; i < particleCount; i++) {
-        const p = createParticle();
-        p.y = Math.random() * emberCanvas.height;
-        p.currentLife = Math.floor(Math.random() * p.lifespan);
-        particles.push(p);
-      }
-    };
-
-    const renderEmbers = () => {
-      if (!isHeroVisible) return;
-      ctx.clearRect(0, 0, emberCanvas.width, emberCanvas.height);
-      ctx.globalCompositeOperation = 'screen';
-
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        p.currentLife++;
-
-        const lifeRatio = p.currentLife / p.lifespan;
-        const currentOpacity = Math.max(0, p.opacity * (1 - lifeRatio));
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = currentOpacity;
-        ctx.fill();
-
-        if (p.currentLife >= p.lifespan || p.y < -10) {
-          particles[i] = createParticle();
-        }
-      }
-
-      animationFrameId = requestAnimationFrame(renderEmbers);
-    };
-
-    resizeCanvas();
-    initParticles();
-
-    window.addEventListener('resize', () => {
-      resizeCanvas();
-    }, { passive: true });
-
-    if ('IntersectionObserver' in window) {
-      const emberObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          isHeroVisible = entry.isIntersecting;
-          if (isHeroVisible) {
-            if (!animationFrameId) renderEmbers();
-          } else {
-            if (animationFrameId) {
-              cancelAnimationFrame(animationFrameId);
-              animationFrameId = null;
-            }
-          }
-        });
-      }, { threshold: 0.1 });
-
-      emberObserver.observe(heroForEmbers);
-    } else {
-      renderEmbers();
-    }
-  }
-
-  /* --------------------------------------------------------------------------
-     FEATURE 8: CHEESE PULL BUTTON MICRO-INTERACTION
-     -------------------------------------------------------------------------- */
-  const yellowButtons = document.querySelectorAll('.btn-brand-yellow');
-
-  yellowButtons.forEach(btn => {
-    const text = btn.textContent || '';
-    if (text.includes('Order') || text.includes('Pizza')) {
-      btn.classList.add('has-cheese-pull');
-    }
-  });
-
+  // Initialize initial language (French default or saved language preference)
+  setLanguage(currentLang);
 });

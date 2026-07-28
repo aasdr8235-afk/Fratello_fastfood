@@ -1,0 +1,18 @@
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python & Temporary Files
+__pycache__/
+*.pyc
+*.pyo
+*.tmp
+*.log
+
+# Node & Dependencies
+node_modules/
+npm-debug.log*
