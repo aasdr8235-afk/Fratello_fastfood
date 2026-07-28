@@ -1,9 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <!-- Primary Landing Page -->
   <url>
-    <loc>https://fratellofast.food/</loc>
-    <lastmod>2026-07-16</lastmod>
+    <loc>https://fratellofastfood.tn/</loc>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+
+    <!-- Authentic Food Photography -->
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/tacos_double.png</image:loc>
+      <image:title>Tacos Double Escalope</image:title>
+      <image:caption>Authentic double escalope tacos with melted cheese sauce at Fratello Fast Food Hammamet</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/box_menu.png</image:loc>
+      <image:title>Plat Mixte Royal Fratello</image:title>
+      <image:caption>Royal mixed grill platter box with fries, ojja, and fresh salad</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/pizza_neptune.png</image:loc>
+      <image:title>Pizza Fruits de Mer</image:title>
+      <image:caption>Fresh Mediterranean seafood pizza with tuna, shrimp, and melted mozzarella</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/pizzduit.png</image:loc>
+      <image:title>Pizza Spéciale Fratello</image:title>
+      <image:caption>Oven-baked artisan pizza loaded with escalope cutlets and mushrooms</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/spaghetti_platter.png</image:loc>
+      <image:title>Plat Spaghetti Escalope Poulet</image:title>
+      <image:caption>Spicy red sauce Tunisian spaghetti served with crispy breaded chicken escalope</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/pizza_fratello.png</image:loc>
+      <image:title>Plat Fratello Supreme</image:title>
+      <image:caption>Grilled chicken tenderloin platter with garlic dip and fries</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/panini_box.png</image:loc>
+      <image:title>Tacos Thon</image:title>
+      <image:caption>Flour tortilla tacos filled with Mediterranean tuna and melted cheese</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/left.png</image:loc>
+      <image:title>Plat Spécial Fratello</image:title>
+      <image:caption>Local favorite chicken escalope with cheesy ojja eggs and seasoned fries</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/pain_special_fratello.png</image:loc>
+      <image:title>Pain Spécial Fratello</image:title>
+      <image:caption>Artisanal oven-baked bread stuffed with crispy chicken escalope and cheese</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/escalope_champignon.png</image:loc>
+      <image:title>Plat Escalope aux Champignons</image:title>
+      <image:caption>Tender chicken escalope in rich mushroom cream sauce with fries</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/ojja_royal.jpeg</image:loc>
+      <image:title>Royal Ojja Tunisienne</image:title>
+      <image:caption>Traditional Tunisian ojja poached egg tomato stew with merguez</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/images/restaurant_storefront.png</image:loc>
+      <image:title>Devanture Fratello Fast Food</image:title>
+      <image:caption>Fratello Fast Food restaurant storefront at Route Nationale 1 Hammamet Sud</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://fratellofastfood.tn/assets/logo/logo.png</image:loc>
+      <image:title>Logo Fratello Fast Food</image:title>
+      <image:caption>Official transparent logo asset for Fratello Fast Food Hammamet</image:caption>
+    </image:image>
+
+    <!-- Authentic Kitchen Video Reels -->
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/box_menu.png</video:thumbnail_loc>
+      <video:title>Bienvenue chez Fratello Fast Food Hammamet</video:title>
+      <video:description>Live kitchen action, high-heat wood-fired oven blistering, and fresh frying at Fratello Fast Food Hammamet Sud.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_restaurant_welcome.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/tacos_double.png</video:thumbnail_loc>
+      <video:title>Tacos Escalope Réels</video:title>
+      <video:description>Real kitchen assembly reel of double chicken escalope tacos with melted cheese sauce.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_tacos_assembly.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/spaghetti_platter.png</video:thumbnail_loc>
+      <video:title>Cuisson Four à Briques</video:title>
+      <video:description>High temperature brick oven firing of 48-hour fermented Neapolitan artisanal dough.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_wood_oven_pizza.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/pizza_neptune.png</video:thumbnail_loc>
+      <video:title>Reel Pizza Fruits de Mer</video:title>
+      <video:description>Seafood pizza topping with Mediterranean tuna, shrimp, and melted mozzarella.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_seafood_pizza.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/pizza_fratello.png</video:thumbnail_loc>
+      <video:title>Craft Pizza Artisanale</video:title>
+      <video:description>Cheese pull and artisan pizza crafting recorded live inside Fratello Fast Food kitchen.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_cheese_pull.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/panini_box.png</video:thumbnail_loc>
+      <video:title>Craft Tacos Fumants</video:title>
+      <video:description>Deep frying hand-breaded chicken cutlets and cheese sauce pour.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_kitchen_fryer.mp4</video:content_loc>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/restaurant_storefront.png</video:thumbnail_loc>
+      <video:title>Bienvenue chez Fratello</video:title>
+      <video:description>Fast food preparation and customer service in Hammamet Sud.</video:description>
+      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_fast_food_prep.mp4</video:content_loc>
+    </video:video>
   </url>
 </urlset>
