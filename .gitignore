@@ -6,6 +6,10 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Large Raw Camera Video Files
+*.mov
+*.MOV
+
 # Python & Temporary Files
 __pycache__/
 *.pyc

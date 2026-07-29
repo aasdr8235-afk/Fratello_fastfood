@@ -221,8 +221,8 @@
     <!-- 5. Hero Section (#hero) -->
     <section id="hero" class="hero-section">
       <div class="hero-video-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;background:#000;">
-        <video id="heroVideo" class="hero-video" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" poster="assets/images/tacos_double.png" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .8s ease;" onloadeddata="this.style.opacity='1'">
-          <source src="assets/videos/reel_fast_food_prep.mp4" type="video/mp4">
+        <video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" poster="assets/images/hero_action_poster.jpg" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .8s ease;" onloadeddata="this.style.opacity='1'">
+          <source src="assets/videos/hero_action_4k.mp4" type="video/mp4">
         </video>
         <div class="hero-gradient-overlay"></div>
         <canvas id="emberCanvas" class="ember-canvas"></canvas>
@@ -623,11 +623,11 @@
           <div id="featuredVideoCard" class="video-card featured-video-card">
             <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
               <!-- Layer 1: Poster fallback -->
-              <div class="video-poster" style="background-image: url('assets/images/box_menu.png');"></div>
+              <div class="video-poster" style="background-image: url('assets/images/reel_flame_poster.jpg');"></div>
               
               <!-- Layer 2: Video element -->
-              <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp main-video" muted loop playsinline webkit-playsinline="true" preload="metadata" poster="assets/images/box_menu.png">
-                <source src="assets/videos/reel_restaurant_welcome.mp4" type="video/mp4">
+              <video class="video-element main-video" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="auto" poster="assets/images/reel_flame_poster.jpg">
+                <source src="assets/videos/reel_kitchen_flame.mp4" type="video/mp4">
               </video>
               
               <!-- Layer 3: Play button overlay -->
@@ -639,9 +639,9 @@
               
               <!-- Layer 4: Info overlay -->
               <div class="video-info-overlay">
-                <span class="badge badge-yellow"><i data-lucide="flame"></i> <span data-fr="Vidéo Principale" data-en="Main Feature">Vidéo Principale</span></span>
-                <h3 data-fr="Expérience Cuisine Fratello" data-en="Fratello Kitchen Experience">Expérience Cuisine Fratello</h3>
-                <p data-fr="Hammamet Sud • Reel Friture & Flamme Live" data-en="Hammamet Sud • Live Fresh Frying & Flame Reel">Hammamet Sud • Reel Friture & Flamme Live</p>
+                <span class="badge badge-yellow"><i data-lucide="flame"></i> <span data-fr="Vidéo Principale 4K" data-en="Main 4K Feature">Vidéo Principale 4K</span></span>
+                <h3 data-fr="Flamme Live & Action Cuisine" data-en="Live Flame & Kitchen Action">Flamme Live & Action Cuisine</h3>
+                <p data-fr="Hammamet Sud • Grillades & Flamme En Direct" data-en="Hammamet Sud • Live Grills & Flames">Hammamet Sud • Grillades & Flamme En Direct</p>
               </div>
               
               <!-- Layer 5: Mute toggle -->
@@ -656,9 +656,9 @@
             <!-- Side Reel 1 -->
             <div class="video-card side-video-card">
               <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
-                <div class="video-poster" style="background-image: url('assets/images/tacos_double.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/tacos_double.png">
-                  <source src="assets/videos/reel_tacos_assembly.mp4" type="video/mp4">
+                <div class="video-poster" style="background-image: url('assets/images/reel_escalope_poster.jpg');"></div>
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/reel_escalope_poster.jpg">
+                  <source src="assets/videos/reel_special_escalope.mp4" type="video/mp4">
                 </video>
                 <div class="video-play-overlay">
                   <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
@@ -666,8 +666,8 @@
                   </button>
                 </div>
                 <div class="video-info-overlay">
-                  <span class="reel-badge">#RealTacos</span>
-                  <h4 data-fr="Tacos Escalope Réels" data-en="Real Escalope Tacos">Tacos Escalope Réels</h4>
+                  <span class="reel-badge">#EscalopeMaison</span>
+                  <h4 data-fr="Préparation Escalope Panée" data-en="Hand-Breaded Escalope Prep">Préparation Escalope Panée</h4>
                 </div>
                 <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
                   <i data-lucide="volume-x"></i>
@@ -678,9 +678,9 @@
             <!-- Side Reel 2 -->
             <div class="video-card side-video-card">
               <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
-                <div class="video-poster" style="background-image: url('assets/images/spaghetti_platter.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/spaghetti_platter.png">
-                  <source src="assets/videos/reel_wood_oven_pizza.mp4" type="video/mp4">
+                <div class="video-poster" style="background-image: url('assets/images/reel_feast_poster.jpg');"></div>
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/reel_feast_poster.jpg">
+                  <source src="assets/videos/reel_artisanal_feast.mp4" type="video/mp4">
                 </video>
                 <div class="video-play-overlay">
                   <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
@@ -688,8 +688,8 @@
                   </button>
                 </div>
                 <div class="video-info-overlay">
-                  <span class="reel-badge">#ArtisanPizza</span>
-                  <h4 data-fr="Cuisson Four à Briques" data-en="Brick Oven Firing">Cuisson Four à Briques</h4>
+                  <span class="reel-badge">#FestinFratello</span>
+                  <h4 data-fr="Plateau Festin Artisanal" data-en="Artisanal Feast Platter">Plateau Festin Artisanal</h4>
                 </div>
                 <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
                   <i data-lucide="volume-x"></i>
@@ -700,8 +700,52 @@
             <!-- Side Reel 3 -->
             <div class="video-card side-video-card">
               <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
+                <div class="video-poster" style="background-image: url('assets/images/reel_oven_poster.jpg');"></div>
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/reel_oven_poster.jpg">
+                  <source src="assets/videos/reel_oven_baking.mp4" type="video/mp4">
+                </video>
+                <div class="video-play-overlay">
+                  <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
+                    <i data-lucide="play"></i>
+                  </button>
+                </div>
+                <div class="video-info-overlay">
+                  <span class="reel-badge">#FourAuBois</span>
+                  <h4 data-fr="Cuisson Four à Briques 4K" data-en="4K Brick Oven Firing">Cuisson Four à Briques 4K</h4>
+                </div>
+                <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
+                  <i data-lucide="volume-x"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Side Reel 4 -->
+            <div class="video-card side-video-card">
+              <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
+                <div class="video-poster" style="background-image: url('assets/images/reel_tacos_poster.jpg');"></div>
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/reel_tacos_poster.jpg">
+                  <source src="assets/videos/reel_tacos_cheese.mp4" type="video/mp4">
+                </video>
+                <div class="video-play-overlay">
+                  <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
+                    <i data-lucide="play"></i>
+                  </button>
+                </div>
+                <div class="video-info-overlay">
+                  <span class="reel-badge">#TacosFromage</span>
+                  <h4 data-fr="Coulage Fromage & Tacos" data-en="Cheese Pour & Tacos Craft">Coulage Fromage & Tacos</h4>
+                </div>
+                <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
+                  <i data-lucide="volume-x"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Side Reel 5 -->
+            <div class="video-card side-video-card">
+              <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
                 <div class="video-poster" style="background-image: url('assets/images/pizza_neptune.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/pizza_neptune.png">
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/pizza_neptune.png">
                   <source src="assets/videos/reel_seafood_pizza.mp4" type="video/mp4">
                 </video>
                 <div class="video-play-overlay">
@@ -719,56 +763,12 @@
               </div>
             </div>
 
-            <!-- Side Reel 4 -->
-            <div class="video-card side-video-card">
-              <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
-                <div class="video-poster" style="background-image: url('assets/images/pizza_fratello.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/pizza_fratello.png">
-                  <source src="assets/videos/reel_cheese_pull.mp4" type="video/mp4">
-                </video>
-                <div class="video-play-overlay">
-                  <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
-                    <i data-lucide="play"></i>
-                  </button>
-                </div>
-                <div class="video-info-overlay">
-                  <span class="reel-badge">#Neapolitan</span>
-                  <h4 data-fr="Craft Pizza Artisanale" data-en="Artisan Pizza Craft">Craft Pizza Artisanale</h4>
-                </div>
-                <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
-                  <i data-lucide="volume-x"></i>
-                </button>
-              </div>
-            </div>
-
-            <!-- Side Reel 5 -->
-            <div class="video-card side-video-card">
-              <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
-                <div class="video-poster" style="background-image: url('assets/images/tacos_double.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/tacos_double.png">
-                  <source src="assets/videos/reel_kitchen_fryer.mp4" type="video/mp4">
-                </video>
-                <div class="video-play-overlay">
-                  <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
-                    <i data-lucide="play"></i>
-                  </button>
-                </div>
-                <div class="video-info-overlay">
-                  <span class="reel-badge">#SaucePour</span>
-                  <h4 data-fr="Craft Tacos Fumants" data-en="Sizzling Tacos Craft">Craft Tacos Fumants</h4>
-                </div>
-                <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
-                  <i data-lucide="volume-x"></i>
-                </button>
-              </div>
-            </div>
-
             <!-- Side Reel 6 -->
             <div class="video-card side-video-card">
               <div class="video-wrapper" style="position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;">
                 <div class="video-poster" style="background-image: url('assets/images/restaurant_storefront.png');"></div>
-                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" class="video-element-tmp" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/restaurant_storefront.png">
-                  <source src="assets/videos/reel_fast_food_prep.mp4" type="video/mp4">
+                <video class="video-element" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;display:block;" muted loop playsinline webkit-playsinline="true" preload="none" poster="assets/images/restaurant_storefront.png">
+                  <source src="assets/videos/reel_restaurant_welcome.mp4" type="video/mp4">
                 </video>
                 <div class="video-play-overlay">
                   <button class="video-play-btn" aria-label="Lire la vidéo" data-fr-label="Lire la vidéo" data-en-label="Play video">
@@ -776,7 +776,7 @@
                   </button>
                 </div>
                 <div class="video-info-overlay">
-                  <span class="reel-badge">#Storefront</span>
+                  <span class="reel-badge">#FratelloHammamet</span>
                   <h4 data-fr="Bienvenue chez Fratello" data-en="Welcome to Fratello">Bienvenue chez Fratello</h4>
                 </div>
                 <button class="video-mute-btn" aria-label="Activer/Désactiver le son" data-fr-label="Activer/Désactiver le son" data-en-label="Toggle sound">
@@ -1097,16 +1097,36 @@
             <img src="assets/images/instagram_feed/insta_12.jpg" alt="Juicy Escalope Tacos" loading="lazy">
             <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
           </div>
+          <div class="gallery-item span-wide" data-src="assets/images/hero_action_poster.jpg" data-caption="Flamme & Action Live en Cuisine 4K">
+            <img src="assets/images/hero_action_poster.jpg" alt="Flamme & Action Live en Cuisine 4K" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
+          <div class="gallery-item span-wide" data-src="assets/images/reel_flame_poster.jpg" data-caption="Grillades & Flamme Live Fratello">
+            <img src="assets/images/reel_flame_poster.jpg" alt="Grillades & Flamme Live Fratello" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
+          <div class="gallery-item" data-src="assets/images/reel_escalope_poster.jpg" data-caption="Préparation Escalope Panée Maison">
+            <img src="assets/images/reel_escalope_poster.jpg" alt="Préparation Escalope Panée Maison" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
+          <div class="gallery-item span-wide" data-src="assets/images/reel_feast_poster.jpg" data-caption="Plateau Festin Artisanal Fratello">
+            <img src="assets/images/reel_feast_poster.jpg" alt="Plateau Festin Artisanal Fratello" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
+          <div class="gallery-item" data-src="assets/images/reel_oven_poster.jpg" data-caption="Cuisson Four à Briques Haute Température">
+            <img src="assets/images/reel_oven_poster.jpg" alt="Cuisson Four à Briques Haute Température" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
+          <div class="gallery-item" data-src="assets/images/reel_tacos_poster.jpg" data-caption="Coulage Fromage & Craft Tacos">
+            <img src="assets/images/reel_tacos_poster.jpg" alt="Coulage Fromage & Craft Tacos" loading="lazy">
+            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
+          </div>
           <div class="gallery-item span-wide" data-src="assets/images/pain_special_fratello.png" data-caption="Pain Spécial Fratello">
             <img src="assets/images/pain_special_fratello.png" alt="Pain Spécial Fratello" loading="lazy">
             <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
           </div>
           <div class="gallery-item span-wide" data-src="assets/images/escalope_champignon.png" data-caption="Plat Escalope aux Champignons">
             <img src="assets/images/escalope_champignon.png" alt="Plat Escalope aux Champignons" loading="lazy">
-            <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
-          </div>
-          <div class="gallery-item span-wide" data-src="assets/images/instagram_feed/insta_25.jpg" data-caption="Chef Speciality Platter">
-            <img src="assets/images/instagram_feed/insta_25.jpg" alt="Chef Speciality Platter" loading="lazy">
             <div class="gallery-overlay"><i data-lucide="zoom-in"></i></div>
           </div>
         </div>

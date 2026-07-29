@@ -392,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ------------------------------------------------------------------------
-     10. VIDEO SHOWCASE ENGINE (VERBATIM SPECIFICATION SECTION 3.3)
+     10. VIDEO SHOWCASE ENGINE (BULLETPROOF & PLAYBACK READY)
      ------------------------------------------------------------------------ */
   function initVideoCard(wrapper) {
     const video = wrapper.querySelector('.video-element');
@@ -403,15 +403,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!video) return;
 
-    // Ensure poster is hidden once video can play (but keep it as fallback)
-    video.addEventListener('canplay', () => {
+    // Hide poster and play overlay when video actually starts playing
+    const onPlaying = () => {
       if (poster) {
         poster.style.opacity = '0';
         poster.style.transition = 'opacity 0.4s ease';
       }
-    });
+      if (playOverlay) {
+        playOverlay.classList.add('is-playing');
+      }
+    };
 
-    // If video errors, keep poster visible and hide play button
+    const onPaused = () => {
+      if (playOverlay) {
+        playOverlay.classList.remove('is-playing');
+      }
+    };
+
+    video.addEventListener('playing', onPlaying);
+    video.addEventListener('canplay', () => {
+      if (!video.paused) onPlaying();
+    });
+    video.addEventListener('pause', onPaused);
+    video.addEventListener('ended', onPaused);
+
+    // If video fails to load, keep poster visible
     video.addEventListener('error', () => {
       if (poster) poster.style.opacity = '1';
       if (playOverlay) playOverlay.style.display = 'none';
@@ -419,24 +435,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Toggle play/pause on button click OR video click
-    const togglePlay = () => {
+    const togglePlay = (e) => {
+      if (e) e.stopPropagation();
       if (video.paused) {
-        video.play().catch(() => {});
-        if (playOverlay) playOverlay.classList.add('is-playing');
+        video.play().then(() => {
+          onPlaying();
+        }).catch(() => {});
       } else {
         video.pause();
-        if (playOverlay) playOverlay.classList.remove('is-playing');
+        onPaused();
       }
     };
 
     if (playBtn) {
-      playBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        togglePlay();
-      });
+      playBtn.addEventListener('click', togglePlay);
     }
     
-    // Clicking the video itself also toggles
+    // Clicking the video element or wrapper toggles playback
     video.addEventListener('click', togglePlay);
 
     // Mute toggle
@@ -460,16 +475,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const overlay = entry.target.querySelector('.video-play-overlay');
       if (!video) return;
 
-      if (entry.isIntersecting && entry.intersectionRatio > 0.35) {
-        video.play().catch(() => {});
-        if (overlay) overlay.classList.add('is-playing');
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.25) {
+        video.play().then(() => {
+          if (overlay) overlay.classList.add('is-playing');
+        }).catch(() => {});
       } else {
         video.pause();
-        video.currentTime = 0; // reset to poster frame
         if (overlay) overlay.classList.remove('is-playing');
       }
     });
-  }, { threshold: [0, 0.35, 1] });
+  }, { threshold: [0, 0.25, 0.5, 1] });
 
   document.querySelectorAll('.video-wrapper').forEach(wrapper => {
     initVideoCard(wrapper);
