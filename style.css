@@ -66,8 +66,8 @@
   --radius-full: 9999px;
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
-  --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 /* Light Theme */
@@ -291,10 +291,11 @@ button {
 
 .section-tag {
   display: inline-block;
+  font-family: var(--font-heading);
   font-size: 0.875rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   color: var(--brand-yellow);
   background: var(--brand-yellow-subtle);
   padding: 6px 16px;
@@ -304,7 +305,9 @@ button {
 }
 
 .section-title {
+  font-family: var(--font-heading);
   font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 16px;
 }
@@ -328,8 +331,10 @@ button {
   gap: 10px;
   padding: 14px 28px;
   border-radius: var(--radius-md);
+  font-family: var(--font-heading);
   font-weight: 700;
   font-size: 1rem;
+  letter-spacing: 0.3px;
   transition: all var(--transition-base);
   text-align: center;
 }
@@ -860,9 +865,10 @@ button {
 }
 
 .brand-title {
+  font-family: var(--font-heading);
   font-size: 1.35rem;
   font-weight: 900;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.2px;
   color: #ffffff;
 }
 
@@ -873,8 +879,10 @@ button {
 }
 
 .nav-link {
+  font-family: var(--font-heading);
   font-size: 0.95rem;
   font-weight: 600;
+  letter-spacing: 0.2px;
   color: #cccccc;
   position: relative;
   padding: 6px 0;
