@@ -2,39 +2,155 @@
    Fratello Fast Food - Design System & Master Stylesheet
    ========================================================================== */
 
-:root {
-  /* Color System */
+/* ==========================================================================
+   Theme System — Dark (Default) + Light
+   ========================================================================== */
+:root,
+[data-theme="dark"] {
+  /* Brand — constant across themes */
   --brand-yellow: #F6C12D;
   --brand-yellow-hover: #e0ac1e;
   --brand-yellow-glow: rgba(246, 193, 45, 0.35);
-  --bg-dark: #0a0a0a;
-  --bg-darker: #050505;
-  --bg-card: #141414;
-  --bg-card-hover: #1c1c1c;
-  --bg-overlay: rgba(10, 10, 10, 0.85);
-  
-  /* Text Colors */
-  --text-white: #ffffff;
-  --text-light: #cccccc;
-  --text-muted: #888888;
-
-  /* Borders & Radii */
-  --border-color: rgba(255, 255, 255, 0.08);
+  --brand-yellow-subtle: rgba(246, 193, 45, 0.1);
   --border-yellow: rgba(246, 193, 45, 0.3);
+
+  /* Backgrounds */
+  --bg-body: #0a0a0a;
+  --bg-section-alt: #050505;
+  --bg-surface: #141414;
+  --bg-surface-hover: #1c1c1c;
+  --bg-elevated: #1a1a1a;
+  --bg-input: #0d0d0d;
+  --bg-overlay: rgba(10, 10, 10, 0.85);
+  --bg-navbar-glass: rgba(10, 10, 10, 0.75);
+  --bg-drawer-overlay: rgba(0, 0, 0, 0.8);
+
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --text-muted: #888888;
+  --text-on-accent: #000000;
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+
+  /* Shadows */
+  --shadow-glow: 0 0 25px rgba(246, 193, 45, 0.25);
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-toast: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-elevated: 0 8px 25px rgba(0, 0, 0, 0.6);
+
+  /* Hero overlay */
+  --hero-gradient-top: rgba(10, 10, 10, 0.75);
+  --hero-gradient-mid: rgba(10, 10, 10, 0.85);
+  --hero-gradient-bot: rgba(10, 10, 10, 0.98);
+
+  /* Scrollbar */
+  --scrollbar-track: #0a0a0a;
+  --scrollbar-thumb: #333333;
+
+  /* Misc */
+  --lang-switcher-bg: rgba(255, 255, 255, 0.06);
+  --lang-switcher-border: rgba(255, 255, 255, 0.12);
+  --btn-outline-hover-bg: rgba(246, 193, 45, 0.05);
+  --social-icon-bg: rgba(255, 255, 255, 0.08);
+  --drawer-panel-bg: #141414;
+  --ticker-bg: #050505;
+  --collab-gradient: var(--collab-gradient);
+
+  /* Non-themeable constants */
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-full: 9999px;
-
-  /* Transitions & Shadows */
   --transition-fast: 0.2s ease;
   --transition-base: 0.3s ease;
-  --shadow-glow: 0 0 25px rgba(246, 193, 45, 0.25);
-  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
-
-  /* Typography */
   --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  /* Backgrounds — warm ivory/cream, NOT clinical white */
+  --bg-body: #f5f0e8;
+  --bg-section-alt: #ede7db;
+  --bg-surface: #ffffff;
+  --bg-surface-hover: #f9f6f0;
+  --bg-elevated: #ffffff;
+  --bg-input: #faf8f4;
+  --bg-overlay: rgba(0, 0, 0, 0.6);
+  --bg-navbar-glass: rgba(245, 240, 232, 0.85);
+  --bg-drawer-overlay: rgba(0, 0, 0, 0.5);
+
+  /* Text — warm charcoal, NOT harsh black */
+  --text-primary: #1a1a1a;
+  --text-secondary: #3d3d3d;
+  --text-muted: #777777;
+  --text-on-accent: #000000;
+
+  /* Borders — warm, visible but subtle */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-default: rgba(0, 0, 0, 0.12);
+
+  /* Shadows — softer */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-toast: 0 4px 20px rgba(0, 0, 0, 0.12);
+  --shadow-elevated: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* Hero overlay — keep readable over dark video */
+  --hero-gradient-top: rgba(0, 0, 0, 0.55);
+  --hero-gradient-mid: rgba(0, 0, 0, 0.6);
+  --hero-gradient-bot: rgba(245, 240, 232, 0.98);
+
+  /* Scrollbar */
+  --scrollbar-track: #ede7db;
+  --scrollbar-thumb: #c4bba8;
+
+  /* Misc */
+  --lang-switcher-bg: rgba(0, 0, 0, 0.05);
+  --lang-switcher-border: rgba(0, 0, 0, 0.1);
+  --brand-yellow-subtle: rgba(246, 193, 45, 0.15);
+  --btn-outline-hover-bg: rgba(246, 193, 45, 0.08);
+  --social-icon-bg: rgba(0, 0, 0, 0.06);
+  --drawer-panel-bg: #f5f0e8;
+  --ticker-bg: #ede7db;
+  --collab-gradient: linear-gradient(135deg, #f5f0e8 0%, #faf3e0 100%);
+}
+
+/* Theme transition — restrained, only for themed properties */
+html[data-theme] body,
+html[data-theme] .navbar,
+html[data-theme] .toast,
+html[data-theme] .menu-card,
+html[data-theme] .modal-dialog,
+html[data-theme] .contact-info-card,
+html[data-theme] .contact-form-card,
+html[data-theme] .review-card,
+html[data-theme] .drawer-panel,
+html[data-theme] .form-control,
+html[data-theme] input,
+html[data-theme] textarea,
+html[data-theme] select {
+  transition: background-color 250ms ease, border-color 250ms ease, color 250ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body,
+  html[data-theme] .navbar,
+  html[data-theme] .toast,
+  html[data-theme] .menu-card,
+  html[data-theme] .modal-dialog,
+  html[data-theme] .contact-info-card,
+  html[data-theme] .contact-form-card,
+  html[data-theme] .review-card,
+  html[data-theme] .drawer-panel,
+  html[data-theme] .form-control,
+  html[data-theme] input,
+  html[data-theme] textarea,
+  html[data-theme] select {
+    transition: none;
+  }
 }
 
 /* Reset & Base Setup */
@@ -50,8 +166,8 @@ html {
 }
 
 body {
-  background-color: var(--bg-dark);
-  color: var(--text-white);
+  background-color: var(--bg-body);
+  color: var(--text-primary);
   font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
@@ -67,7 +183,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 800;
   line-height: 1.2;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 a {
@@ -123,11 +239,11 @@ button {
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  background: var(--scrollbar-track);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333333;
+  background: var(--scrollbar-thumb);
   border-radius: 4px;
 }
 
@@ -166,7 +282,7 @@ button {
 }
 
 .bg-darker {
-  background-color: var(--bg-darker);
+  background-color: var(--bg-section-alt);
 }
 
 .section-header {
@@ -180,7 +296,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 2px;
   color: var(--brand-yellow);
-  background: rgba(246, 193, 45, 0.1);
+  background: var(--brand-yellow-subtle);
   padding: 6px 16px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-yellow);
@@ -231,7 +347,7 @@ button {
 
 .btn-yellow {
   background-color: var(--brand-yellow);
-  color: #000000;
+  color: var(--text-on-accent);
   box-shadow: 0 4px 15px rgba(246, 193, 45, 0.3);
 }
 
@@ -243,19 +359,19 @@ button {
 
 .btn-outline {
   background: transparent;
-  color: var(--text-white);
-  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-outline:hover {
   border-color: var(--brand-yellow);
   color: var(--brand-yellow);
-  background: rgba(246, 193, 45, 0.05);
+  background: var(--btn-outline-hover-bg);
 }
 
 .btn-insta {
   background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  color: var(--text-white);
+  color: var(--text-primary);
   box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3);
 }
 
@@ -267,7 +383,7 @@ button {
 
 .btn-fb {
   background-color: #1877f2;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .btn-fb:hover {
@@ -277,7 +393,7 @@ button {
 
 .btn-whatsapp {
   background-color: #25d366;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .btn-whatsapp:hover {
@@ -307,8 +423,8 @@ button {
   position: relative;
   display: inline-flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--lang-switcher-bg);
+  border: 1px solid var(--lang-switcher-border);
   padding: 3px;
   border-radius: var(--radius-full);
   user-select: none;
@@ -340,7 +456,7 @@ button {
   min-height: 30px;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text-secondary);
   padding: 4px 12px;
   border-radius: var(--radius-full);
   transition: color 0.25s ease;
@@ -350,7 +466,7 @@ button {
 }
 
 .lang-btn:hover {
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .lang-btn.active {
@@ -360,6 +476,56 @@ button {
 .lang-btn:focus-visible {
   outline: 2px solid var(--brand-yellow);
   outline-offset: 2px;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--lang-switcher-bg);
+  border: 1px solid var(--lang-switcher-border);
+  color: var(--brand-yellow);
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--brand-yellow-subtle);
+  border-color: var(--border-yellow);
+  transform: scale(1.06);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 2px;
+}
+
+.theme-icon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.2;
+}
+
+[data-theme="dark"] .theme-icon-light {
+  display: none !important;
+}
+
+[data-theme="dark"] .theme-icon-dark {
+  display: block !important;
+}
+
+[data-theme="light"] .theme-icon-dark {
+  display: none !important;
+}
+
+[data-theme="light"] .theme-icon-light {
+  display: block !important;
 }
 
 /* Badges */
@@ -377,7 +543,7 @@ button {
 
 .badge-yellow {
   background-color: var(--brand-yellow);
-  color: #000;
+  color: var(--text-on-accent);
 }
 
 .badge-outline {
@@ -393,7 +559,7 @@ button {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background-color: #0a0a0a;
+  background-color: var(--bg-body);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -497,11 +663,11 @@ button {
   pointer-events: auto;
   min-width: 280px;
   padding: 14px 20px;
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-left: 4px solid var(--brand-yellow);
   border-radius: var(--radius-sm);
-  color: var(--text-white);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-toast);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -610,7 +776,7 @@ button {
 }
 
 .navbar.scrolled {
-  background-color: rgba(10, 10, 10, 0.75);
+  background-color: var(--bg-navbar-glass);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   padding: 10px 0;
@@ -664,7 +830,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-white);
+  color: var(--text-primary);
   font-size: 1.5rem;
 }
 
@@ -697,7 +863,7 @@ button {
   font-size: 1.35rem;
   font-weight: 900;
   letter-spacing: 1.5px;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .desktop-nav-links {
@@ -709,7 +875,7 @@ button {
 .nav-link {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-secondary);
   position: relative;
   padding: 6px 0;
 }
@@ -745,7 +911,7 @@ button {
   gap: 8px;
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .nav-phone-btn:hover {
@@ -770,7 +936,7 @@ button {
 .drawer-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--bg-drawer-overlay);
   backdrop-filter: blur(8px);
 }
 
@@ -781,7 +947,7 @@ button {
   width: 85%;
   max-width: 380px;
   height: 100%;
-  background: var(--bg-card);
+  background: var(--drawer-panel-bg);
   padding: 30px 24px;
   display: flex;
   flex-direction: column;
@@ -816,8 +982,8 @@ button {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
-  background: rgba(255,255,255,0.05);
-  color: var(--text-white);
+  background: var(--social-icon-bg);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -833,9 +999,9 @@ button {
 .drawer-link {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-light);
+  color: var(--text-secondary);
   padding: 8px 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .drawer-link:hover {
@@ -859,11 +1025,11 @@ button {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-full);
-  background: rgba(255,255,255,0.08);
+  background: var(--social-icon-bg);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 /* ==========================================================================
@@ -959,7 +1125,7 @@ button {
   gap: 10px;
   background: rgba(20, 20, 20, 0.85);
   backdrop-filter: blur(8px);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   padding: 8px 20px;
   border-radius: var(--radius-full);
   margin-bottom: 24px;
@@ -988,7 +1154,7 @@ button {
 .status-text {
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .hero-title {
@@ -1001,7 +1167,7 @@ button {
 
 .hero-subtitle {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: var(--text-light);
+  color: var(--text-secondary);
   max-width: 720px;
   margin-bottom: 36px;
   line-height: 1.7;
@@ -1061,9 +1227,9 @@ button {
    ========================================================================== */
 .review-ticker-wrapper {
   width: 100%;
-  background: #111111;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   overflow: hidden;
   padding: 14px 0;
   white-space: nowrap;
@@ -1087,7 +1253,7 @@ button {
 .ticker-item {
   font-size: 0.95rem;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-secondary);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1124,7 +1290,7 @@ button {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   cursor: pointer;
 }
@@ -1144,7 +1310,7 @@ button {
   position: absolute;
   top: 20px;
   left: 20px;
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border: 1px solid var(--border-yellow);
   color: var(--brand-yellow);
   padding: 8px 16px;
@@ -1181,7 +1347,7 @@ button {
 
 .section-description {
   font-size: 1.1rem;
-  color: var(--text-light);
+  color: var(--text-secondary);
   margin-bottom: 30px;
   line-height: 1.7;
 }
@@ -1210,7 +1376,7 @@ button {
 .feature-checklist strong {
   display: block;
   font-size: 1.1rem;
-  color: var(--text-white);
+  color: var(--text-primary);
   margin-bottom: 4px;
 }
 
@@ -1235,9 +1401,9 @@ button {
 }
 
 .platter-card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   overflow: hidden;
   position: relative;
   transition: transform var(--transition-base), border-color var(--transition-base);
@@ -1275,11 +1441,11 @@ button {
 
 .platter-title {
   font-size: 1.8rem;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .platter-desc {
-  color: var(--text-light);
+  color: var(--text-secondary);
   font-size: 1rem;
 }
 
@@ -1348,9 +1514,9 @@ button {
 }
 
 .menu-card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1460,7 +1626,7 @@ button {
   border-radius: 16px;
   overflow: hidden;
   isolation: isolate; /* creates a stacking context */
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
@@ -1562,12 +1728,12 @@ button {
 
 .video-info-overlay h3 {
   font-size: 1.15rem;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .video-info-overlay h4 {
   font-size: 1rem;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .video-info-overlay p {
@@ -1624,9 +1790,9 @@ button {
 }
 
 .social-showcase-card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   padding: 30px;
 }
 
@@ -1650,7 +1816,7 @@ button {
   height: 64px;
   border-radius: var(--radius-full);
   object-fit: contain;
-  background: #0b0f14;
+  background: var(--bg-section-alt);
   padding: 6px;
   border: 2px solid var(--brand-yellow);
   box-shadow: 0 0 14px rgba(246, 193, 45, 0.35);
@@ -1828,7 +1994,7 @@ button {
 .info-item strong {
   display: block;
   font-size: 1.1rem;
-  color: var(--text-white);
+  color: var(--text-primary);
   margin-bottom: 2px;
 }
 
@@ -1846,7 +2012,7 @@ button {
 .location-map {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-card);
 }
 
@@ -1880,7 +2046,7 @@ button {
 }
 
 .review-card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-yellow);
   padding: 30px;
@@ -1920,7 +2086,7 @@ button {
 
 .review-body p {
   font-style: italic;
-  color: var(--text-light);
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
@@ -1955,7 +2121,7 @@ button {
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   cursor: pointer;
 }
 
@@ -2029,9 +2195,9 @@ button {
 }
 
 .contact-form-card {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
   padding: 40px;
 }
 
@@ -2056,7 +2222,7 @@ button {
 .form-group label {
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--text-light);
+  color: var(--text-secondary);
   transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: left top;
 }
@@ -2069,11 +2235,11 @@ button {
 .form-control, input[type="text"], input[type="tel"], select, textarea {
   width: 100%;
   padding: 14px 18px;
-  background: #0d0d0d;
-  border: 1px solid var(--border-color);
-  border-bottom: 2px solid var(--border-color);
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-bottom: 2px solid var(--border-subtle);
   border-radius: var(--radius-sm);
-  color: var(--text-white);
+  color: var(--text-primary);
   outline: none;
   transition: border-color 0.25s ease, border-bottom-color 0.25s ease, box-shadow 0.25s ease;
 }
@@ -2092,7 +2258,7 @@ button {
    16. Collaboration Section (#collaboration)
    ========================================================================== */
 .collab-card {
-  background: linear-gradient(135deg, #141414 0%, #1f1a0a 100%);
+  background: var(--collab-gradient);
   border-radius: var(--radius-md);
   border: 1px solid var(--border-yellow);
   padding: 28px 20px;
@@ -2122,7 +2288,7 @@ button {
 }
 
 .collab-desc {
-  color: var(--text-light);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   margin-bottom: 20px;
   max-width: 440px;
@@ -2134,7 +2300,7 @@ button {
    ========================================================================== */
 .site-footer {
   background-color: #050505;
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-subtle);
   padding: 80px 0 30px;
 }
 
@@ -2172,7 +2338,7 @@ button {
 
 .footer-address {
   font-style: normal;
-  color: var(--text-light);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   line-height: 1.8;
 }
@@ -2195,7 +2361,7 @@ button {
 }
 
 .footer-links a:hover {
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .footer-social-row {
@@ -2205,14 +2371,14 @@ button {
   justify-content: space-between;
   gap: 20px;
   padding: 30px 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
   margin-bottom: 30px;
 }
 
 .social-label {
   font-weight: 700;
-  color: var(--text-white);
+  color: var(--text-primary);
 }
 
 .social-badges-group {
@@ -2228,8 +2394,8 @@ button {
   border-radius: var(--radius-full);
   font-size: 0.85rem;
   font-weight: 600;
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
 }
 
 .footer-bottom-bar {
@@ -2266,7 +2432,7 @@ button {
   z-index: 8900;
   background: rgba(10, 10, 10, 0.95);
   backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-subtle);
   padding: 12px 20px;
   display: flex;
   gap: 12px;
@@ -2298,7 +2464,7 @@ button {
 .btn-call {
   background: #222;
   color: #fff;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border-subtle);
 }
 
 .btn-wa {
@@ -2330,7 +2496,7 @@ button {
 }
 
 .modal-dialog {
-  background: var(--bg-card);
+  background: var(--bg-surface);
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-yellow);
   width: 100%;
@@ -2353,8 +2519,8 @@ button {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
-  background: rgba(255,255,255,0.08);
-  color: var(--text-white);
+  background: var(--social-icon-bg);
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2417,7 +2583,7 @@ button {
 
 .lightbox-caption {
   margin-top: 16px;
-  color: var(--text-light);
+  color: var(--text-secondary);
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;

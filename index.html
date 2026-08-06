@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title data-fr="Fratello Fast Food | Vrai Goût & Ingrédients Frais | Hammamet, Tunisie" data-en="Fratello Fast Food | Authentic Real Flavor & Fresh Ingredients | Hammamet, Tunisia">Fratello Fast Food | Vrai Goût & Ingrédients Frais | Hammamet, Tunisie</title>
   <meta name="description" content="Fratello Fast Food Hammamet officiel. Suivez-nous sur Instagram @fratello_fast_food.hammamet et Facebook. Découvrez la vraie photographie culinaire, 7 reels promotionnels, pizzas artisanales cuites au four, tacos escalope garnis, grillades mixtes et Makloub tunisien. Ouvert tous les jours 10h - 02h.">
-  <meta name="keywords" content="Fratello Fast Food, Restaurant Hammamet, Pizza Fruits de Mer, Tacos Escalope, Makloub Hammamet, Fast Food Tunisia, Gourmet Burgers Hammamet, Pizza Royal Fratello, Fratello Instagram, Fratello Facebook, fast food tunisie, pizza hammamet, livraison hammamet">
   <meta name="theme-color" content="#F6C12D">
+
+  <!-- Early Theme Initialization (Prevents Light/Dark Flash) -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fratello_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
 
   <!-- Favicon & Apple Touch Icon (Transparent Logo Only) -->
   <link rel="icon" type="image/png" href="assets/logo/logo.png">
@@ -160,6 +167,12 @@
             <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
           </div>
 
+          <!-- Theme Switcher Toggle -->
+          <button class="theme-toggle" aria-label="Passer au mode clair" title="Passer au mode clair">
+            <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+            <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+          </button>
+
           <a href="tel:+21623445536" class="nav-phone-btn" aria-label="Appeler le +216 23 445 536">
             <i data-lucide="phone-call"></i>
             <span>+216 23 445 536</span>
@@ -185,6 +198,10 @@
             <button class="lang-btn active" data-lang="fr" role="radio" aria-checked="true" aria-label="Français">FR</button>
             <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
           </div>
+          <button class="theme-toggle" aria-label="Passer au mode clair" title="Passer au mode clair">
+            <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+            <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+          </button>
           <button id="drawer-close" class="drawer-close-btn" aria-label="Fermer le menu">
             <i data-lucide="x"></i>
           </button>

@@ -80,6 +80,49 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ------------------------------------------------------------------------
+     Theme Switching Engine (Dark Default | Light Toggle)
+     ------------------------------------------------------------------------ */
+  let currentTheme = localStorage.getItem('fratello_theme') || 'dark';
+
+  function setTheme(theme) {
+    currentTheme = theme;
+    localStorage.setItem('fratello_theme', theme);
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // Update theme toggle buttons aria-label & title
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+      const isDark = theme === 'dark';
+      const labelFr = isDark ? 'Passer au mode clair' : 'Passer au mode sombre';
+      const labelEn = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+      const labelText = currentLang === 'fr' ? labelFr : labelEn;
+
+      btn.setAttribute('aria-label', labelText);
+      btn.setAttribute('title', labelText);
+      btn.setAttribute('aria-pressed', isDark ? 'false' : 'true');
+    });
+
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  }
+
+  // Theme toggle button click handlers
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+      
+      const msgFr = newTheme === 'light' ? 'Mode Clair activé' : 'Mode Sombre activé';
+      const msgEn = newTheme === 'light' ? 'Light Mode enabled' : 'Dark Mode enabled';
+      showToast(currentLang === 'fr' ? msgFr : msgEn, 'info');
+    });
+  });
+
+  // Initialize Theme State
+  setTheme(currentTheme);
+
+
+  /* ------------------------------------------------------------------------
      0. Preloader (Loading Screen)
      ------------------------------------------------------------------------ */
   const preloader = document.getElementById('preloader');
