@@ -302,27 +302,51 @@ button {
   gap: 12px;
 }
 
-/* Language Switcher Styling */
+/* Language Switcher — Sliding Pill */
 .lang-switcher {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
-  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 3px;
   border-radius: var(--radius-full);
+  user-select: none;
+}
+
+.lang-switcher .lang-slider {
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 3px;
+  width: calc(50% - 3px);
+  background: var(--brand-yellow);
+  border-radius: var(--radius-full);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.lang-switcher[data-active="en"] .lang-slider {
+  transform: translateX(100%);
 }
 
 .lang-btn {
+  position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 30px;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--text-muted);
-  padding: 3px 8px;
-  border-radius: 4px;
-  transition: color var(--transition-fast), background var(--transition-fast);
+  color: var(--text-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  transition: color 0.25s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 .lang-btn:hover {
@@ -331,24 +355,11 @@ button {
 
 .lang-btn.active {
   color: #000000;
-  background-color: var(--brand-yellow);
 }
 
-.lang-name {
-  font-size: 0.75rem;
-  font-weight: 600;
-  opacity: 0.85;
-}
-
-.lang-btn.active .lang-name {
-  color: #000000;
-  opacity: 1;
-}
-
-.lang-divider {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  opacity: 0.5;
+.lang-btn:focus-visible {
+  outline: 2px solid var(--brand-yellow);
+  outline-offset: 2px;
 }
 
 /* Badges */
@@ -587,15 +598,23 @@ button {
   width: 100%;
   z-index: 9000;
   padding: 16px 0;
-  transition: background-color var(--transition-base), backdrop-filter var(--transition-base), padding var(--transition-base);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color var(--transition-base),
+              backdrop-filter var(--transition-base),
+              padding var(--transition-base);
+  will-change: transform;
+}
+
+.navbar.nav-hidden {
+  transform: translateY(-100%);
 }
 
 .navbar.scrolled {
-  background-color: rgba(10, 10, 10, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background-color: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   padding: 10px 0;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .nav-container {
@@ -2028,6 +2047,7 @@ button {
 }
 
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -2037,6 +2057,13 @@ button {
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-light);
+  transition: color 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left top;
+}
+
+.form-group:focus-within label {
+  color: var(--brand-yellow);
+  transform: translateY(-2px);
 }
 
 .form-control, input[type="text"], input[type="tel"], select, textarea {
@@ -2044,14 +2071,17 @@ button {
   padding: 14px 18px;
   background: #0d0d0d;
   border: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
   border-radius: var(--radius-sm);
   color: var(--text-white);
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.25s ease, border-bottom-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .form-control:focus, input:focus, select:focus, textarea:focus {
-  border-color: var(--brand-yellow);
+  border-color: rgba(246, 193, 45, 0.35);
+  border-bottom-color: var(--brand-yellow);
+  box-shadow: 0 2px 12px rgba(246, 193, 45, 0.1);
 }
 
 .section-padding-sm {
@@ -2391,4 +2421,25 @@ button {
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
+}
+
+/* ==========================================================================
+   Reduced Motion — Accessibility Override
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    transition: background-color 0.01ms, padding 0.01ms;
+  }
+  .navbar.nav-hidden {
+    transition: none;
+  }
+  .lang-switcher .lang-slider {
+    transition: none;
+  }
+  .form-group label {
+    transition: none;
+  }
+  .form-control, input[type="text"], input[type="tel"], select, textarea {
+    transition: none;
+  }
 }

@@ -19,12 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.lang = lang;
 
     // Update active class on language toggle buttons
+    document.querySelectorAll('.lang-switcher').forEach(sw => {
+      sw.setAttribute('data-active', lang);
+    });
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
-      if (btn.getAttribute('data-lang') === lang) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
+      const isActive = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-checked', isActive ? 'true' : 'false');
     });
 
     // Update title tag
@@ -108,16 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     window.addEventListener('load', dismissPreloader);
     // Safety fallback timeout to prevent preloader lockup
-    setTimeout(dismissPreloader, 3000);
+    setTimeout(dismissPreloader, 1500);
   }
 
   /* ------------------------------------------------------------------------
-     1. Scroll Progress Bar & Navbar Scroll State
+     1. Scroll Progress Bar & Smart Auto-Hiding Navbar
      ------------------------------------------------------------------------ */
   const progressBar = document.getElementById('scroll-progress');
   const navbar = document.getElementById('main-navbar');
   const stickyMobileBar = document.getElementById('mobile-order-bar');
   const siteFooter = document.querySelector('.site-footer');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  let lastScrollY = window.scrollY;
 
   window.addEventListener('scroll', () => {
     const scrollTop = window.scrollY;
@@ -128,14 +132,25 @@ document.addEventListener('DOMContentLoaded', () => {
       progressBar.style.width = `${scrollPercent}%`;
     }
 
-    // Navbar background blur on scroll
+    // Smart auto-hiding navbar
     if (navbar) {
+      // Don't hide navbar while mobile drawer is open
+      const isDrawerOpen = mobileDrawer && mobileDrawer.classList.contains('open');
+
+      if (scrollTop > 100 && scrollTop > lastScrollY && !isDrawerOpen) {
+        navbar.classList.add('nav-hidden');
+      } else {
+        navbar.classList.remove('nav-hidden');
+      }
+
       if (scrollTop > 50) {
         navbar.classList.add('scrolled');
       } else {
         navbar.classList.remove('scrolled');
       }
     }
+
+    lastScrollY = scrollTop;
 
     // Hide sticky mobile order bar near footer
     if (stickyMobileBar && siteFooter) {
@@ -151,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Active Section Link Highlighting
     updateActiveNavLinks();
-  });
+  }, { passive: true });
 
   /* ------------------------------------------------------------------------
      Active Section Link Tracking
@@ -211,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
      ------------------------------------------------------------------------ */
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const drawerCloseBtn = document.getElementById('drawer-close');
-  const mobileDrawer = document.getElementById('mobile-drawer');
   const drawerOverlay = document.getElementById('drawer-overlay');
   const drawerLinks = document.querySelectorAll('.drawer-link');
 

@@ -154,10 +154,10 @@
 
         <div class="nav-cta-group">
           <!-- Language Switcher Toggle -->
-          <div class="lang-switcher" aria-label="Sélecteur de langue / Language Selector">
-            <button class="lang-btn active" data-lang="fr" aria-label="Français">FR <span class="lang-name">Français</span></button>
-            <span class="lang-divider">|</span>
-            <button class="lang-btn" data-lang="en" aria-label="English">EN <span class="lang-name">English</span></button>
+          <div class="lang-switcher" data-active="fr" role="radiogroup" aria-label="Sélecteur de langue / Language Selector">
+            <div class="lang-slider" aria-hidden="true"></div>
+            <button class="lang-btn active" data-lang="fr" role="radio" aria-checked="true" aria-label="Français">FR</button>
+            <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
           </div>
 
           <a href="tel:+21623445536" class="nav-phone-btn" aria-label="Appeler le +216 23 445 536">
@@ -180,10 +180,10 @@
       <div class="drawer-header">
         <img src="assets/logo/logo.png" alt="Fratello Logo" class="drawer-logo">
         <div class="drawer-header-actions">
-          <div class="lang-switcher" aria-label="Sélecteur de langue / Language Selector">
-            <button class="lang-btn active" data-lang="fr" aria-label="Français">FR <span class="lang-name">Français</span></button>
-            <span class="lang-divider">|</span>
-            <button class="lang-btn" data-lang="en" aria-label="English">EN <span class="lang-name">English</span></button>
+          <div class="lang-switcher" data-active="fr" role="radiogroup" aria-label="Sélecteur de langue / Language Selector">
+            <div class="lang-slider" aria-hidden="true"></div>
+            <button class="lang-btn active" data-lang="fr" role="radio" aria-checked="true" aria-label="Français">FR</button>
+            <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
           </div>
           <button id="drawer-close" class="drawer-close-btn" aria-label="Fermer le menu">
             <i data-lucide="x"></i>
