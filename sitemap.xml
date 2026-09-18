@@ -5,19 +5,19 @@
   <!-- Primary Landing Page -->
   <url>
     <loc>https://fratellofastfood.tn/</loc>
-    <lastmod>2026-07-29</lastmod>
+    <lastmod>2026-09-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
 
-    <!-- Authentic Food & Kitchen Photography -->
+    <!-- Authentic Food &amp; Kitchen Photography -->
     <image:image>
       <image:loc>https://fratellofastfood.tn/assets/images/hero_action_poster.jpg</image:loc>
-      <image:title>Flamme & Action Live en Cuisine 4K</image:title>
+      <image:title>Flamme &amp; Action Live en Cuisine 4K</image:title>
       <image:caption>High-resolution live kitchen action at Fratello Fast Food Hammamet</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://fratellofastfood.tn/assets/images/reel_flame_poster.jpg</image:loc>
-      <image:title>Grillades & Flamme Live Fratello</image:title>
+      <image:title>Grillades &amp; Flamme Live Fratello</image:title>
       <image:caption>Live grill flames and fast food cooking at Fratello</image:caption>
     </image:image>
     <image:image>
@@ -37,7 +37,7 @@
     </image:image>
     <image:image>
       <image:loc>https://fratellofastfood.tn/assets/images/reel_tacos_poster.jpg</image:loc>
-      <image:title>Coulage Fromage & Craft Tacos</image:title>
+      <image:title>Coulage Fromage &amp; Craft Tacos</image:title>
       <image:caption>Melty cheese sauce pour over double escalope tacos</image:caption>
     </image:image>
     <image:image>
@@ -95,7 +95,7 @@
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_flame_poster.jpg</video:thumbnail_loc>
-      <video:title>Flamme Live & Action Cuisine</video:title>
+      <video:title>Flamme Live &amp; Action Cuisine</video:title>
       <video:description>High-heat live flame grilling and cooking action inside Fratello kitchen.</video:description>
       <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_kitchen_flame.mp4</video:content_loc>
     </video:video>
@@ -119,7 +119,7 @@
     </video:video>
     <video:video>
       <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_tacos_poster.jpg</video:thumbnail_loc>
-      <video:title>Coulage Fromage & Tacos</video:title>
+      <video:title>Coulage Fromage &amp; Tacos</video:title>
       <video:description>Melted cheese sauce pour over double chicken escalope tacos.</video:description>
       <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_tacos_cheese.mp4</video:content_loc>
     </video:video>

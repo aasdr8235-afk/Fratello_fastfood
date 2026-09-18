@@ -752,6 +752,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ------------------------------------------------------------------------
+     14.5 FAQ Accordion Interactive Handler
+     ------------------------------------------------------------------------ */
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const item = button.closest('.faq-item');
+      const isOpen = item.classList.contains('active');
+
+      // Close other items for clean single-accordion UX
+      document.querySelectorAll('.faq-item').forEach(otherItem => {
+        if (otherItem !== item) {
+          otherItem.classList.remove('active');
+          const otherBtn = otherItem.querySelector('.faq-question');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      // Toggle current item
+      if (isOpen) {
+        item.classList.remove('active');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        item.classList.add('active');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
   // Initialize initial language (French default or saved language preference)
   setLanguage(currentLang);
 });

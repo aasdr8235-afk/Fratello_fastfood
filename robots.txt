@@ -1,4 +1,14 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fratellofast.food/sitemap.xml
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /assets/images/
+Allow: /assets/logo/
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+Sitemap: https://fratellofastfood.tn/sitemap.xml
