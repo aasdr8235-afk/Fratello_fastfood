@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       gridHTML += `
         <div class="insta-grid-item gallery-item" data-src="${imgPath}" data-caption="Fratello Instagram Post #${i}">
-          <img src="${imgPath}" alt="Instagram feed photo ${i}" loading="lazy">
+          <img src="${imgPath}" alt="Fratello Fast Food Hammamet - Moment Gourmand #${i}" width="300" height="300" loading="lazy" decoding="async">
           <div class="insta-hover-overlay">
             <i data-lucide="heart" style="width: 18px; height: 18px; fill: #fff;"></i>
             <span>${likesCount}</span>

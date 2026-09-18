@@ -4,136 +4,134 @@
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <!-- Primary Landing Page -->
   <url>
-    <loc>https://fratellofastfood.tn/</loc>
+    <loc>https://fratellofast.food/</loc>
     <lastmod>2026-09-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
 
     <!-- Authentic Food &amp; Kitchen Photography -->
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/hero_action_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/hero_action_poster.jpg</image:loc>
       <image:title>Flamme &amp; Action Live en Cuisine 4K</image:title>
       <image:caption>High-resolution live kitchen action at Fratello Fast Food Hammamet</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_flame_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_flame_poster.jpg</image:loc>
       <image:title>Grillades &amp; Flamme Live Fratello</image:title>
       <image:caption>Live grill flames and fast food cooking at Fratello</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_escalope_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_escalope_poster.jpg</image:loc>
       <image:title>Préparation Escalope Panée Maison</image:title>
       <image:caption>Hand-breaded chicken escalope prep</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_feast_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_feast_poster.jpg</image:loc>
       <image:title>Plateau Festin Artisanal Fratello</image:title>
       <image:caption>Artisanal feast platter with grills, ojja, and fries</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_oven_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_oven_poster.jpg</image:loc>
       <image:title>Cuisson Four à Briques 4K</image:title>
       <image:caption>Brick oven firing of Neapolitan artisan pizza</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_tacos_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_tacos_poster.jpg</image:loc>
       <image:title>Coulage Fromage &amp; Craft Tacos</image:title>
       <image:caption>Melty cheese sauce pour over double escalope tacos</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/pain_special_fratello.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/pain_special_fratello.png</image:loc>
       <image:title>Pain Spécial Fratello</image:title>
       <image:caption>Artisanal oven-baked bread stuffed with crispy chicken escalope</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/escalope_champignon.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/escalope_champignon.png</image:loc>
       <image:title>Plat Escalope aux Champignons</image:title>
       <image:caption>Tender chicken escalope in rich mushroom cream sauce</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/tacos_double.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/tacos_double.png</image:loc>
       <image:title>Tacos Double Escalope</image:title>
       <image:caption>Double escalope tacos with melted cheese sauce</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_feast_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_feast_poster.jpg</image:loc>
       <image:title>Plat Mixte Royal Fratello</image:title>
       <image:caption>Royal mixed grill platter box</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/reel_oven_poster.jpg</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/reel_oven_poster.jpg</image:loc>
       <image:title>Pizza Fruits de Mer</image:title>
       <image:caption>Fresh Mediterranean seafood pizza</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/pizzduit.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/pizzduit.png</image:loc>
       <image:title>Pizza Spéciale Fratello</image:title>
       <image:caption>Oven-baked artisan pizza loaded with escalope cutlets</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/spaghetti_platter.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/spaghetti_platter.png</image:loc>
       <image:title>Plat Spaghetti Escalope Poulet</image:title>
       <image:caption>Spicy Tunisian spaghetti served with crispy escalope</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/images/restaurant_storefront.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/images/restaurant_storefront.png</image:loc>
       <image:title>Devanture Fratello Fast Food</image:title>
       <image:caption>Restaurant storefront at Route Nationale 1 Hammamet Sud</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://fratellofastfood.tn/assets/logo/logo.png</image:loc>
+      <image:loc>https://fratellofast.food/assets/logo/logo.png</image:loc>
       <image:title>Logo Fratello Fast Food</image:title>
       <image:caption>Official transparent logo asset for Fratello Fast Food</image:caption>
     </image:image>
 
     <!-- High-Resolution Kitchen Video Reels -->
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/hero_action_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/hero_action_poster.jpg</video:thumbnail_loc>
       <video:title>Action Live en Cuisine 4K</video:title>
       <video:description>High-resolution live kitchen action and high-temperature oven blistering at Fratello Fast Food Hammamet Sud.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/hero_action_4k.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/hero_action_4k.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_flame_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_flame_poster.jpg</video:thumbnail_loc>
       <video:title>Flamme Live &amp; Action Cuisine</video:title>
       <video:description>High-heat live flame grilling and cooking action inside Fratello kitchen.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_kitchen_flame.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_kitchen_flame.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_escalope_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_escalope_poster.jpg</video:thumbnail_loc>
       <video:title>Préparation Escalope Panée</video:title>
       <video:description>Real kitchen assembly of hand-breaded chicken escalope.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_special_escalope.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_special_escalope.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_feast_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_feast_poster.jpg</video:thumbnail_loc>
       <video:title>Plateau Festin Artisanal</video:title>
       <video:description>Full house platter feast with grills, ojja, and fries.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_artisanal_feast.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_artisanal_feast.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_oven_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_oven_poster.jpg</video:thumbnail_loc>
       <video:title>Cuisson Four à Briques 4K</video:title>
       <video:description>High-temperature brick oven firing of Neapolitan artisan pizza.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_oven_baking.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_oven_baking.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_tacos_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_tacos_poster.jpg</video:thumbnail_loc>
       <video:title>Coulage Fromage &amp; Tacos</video:title>
       <video:description>Melted cheese sauce pour over double chicken escalope tacos.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_tacos_cheese.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_tacos_cheese.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/reel_oven_poster.jpg</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/reel_oven_poster.jpg</video:thumbnail_loc>
       <video:title>Reel Pizza Fruits de Mer</video:title>
       <video:description>Fresh Mediterranean seafood pizza topping with tuna, shrimp, and mozzarella.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_seafood_pizza.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_seafood_pizza.mp4</video:content_loc>
     </video:video>
     <video:video>
-      <video:thumbnail_loc>https://fratellofastfood.tn/assets/images/restaurant_storefront.png</video:thumbnail_loc>
+      <video:thumbnail_loc>https://fratellofast.food/assets/images/restaurant_storefront.png</video:thumbnail_loc>
       <video:title>Bienvenue chez Fratello</video:title>
       <video:description>Fast food preparation and customer service in Hammamet Sud.</video:description>
-      <video:content_loc>https://fratellofastfood.tn/assets/videos/reel_restaurant_welcome.mp4</video:content_loc>
+      <video:content_loc>https://fratellofast.food/assets/videos/reel_restaurant_welcome.mp4</video:content_loc>
     </video:video>
   </url>
 </urlset>
