@@ -5,7 +5,7 @@
   <!-- Primary Landing Page -->
   <url>
     <loc>https://fratellofast.food/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-10-01</lastmod>
 
     <!-- Authentic Food &amp; Kitchen Photography -->
     <image:image>
@@ -133,5 +133,67 @@
       <video:description>Fast food preparation and customer service in Hammamet Sud.</video:description>
       <video:content_loc>https://fratellofast.food/assets/videos/reel_restaurant_welcome.mp4</video:content_loc>
     </video:video>
+  </url>
+
+  <!-- Hub Guide Culinaire -->
+  <url>
+    <loc>https://fratellofast.food/guide-culinaire.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- À Propos de Fratello Fast Food -->
+  <url>
+    <loc>https://fratellofast.food/a-propos.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Articles du Guide Culinaire (Editorial & AdSense Content) -->
+  <url>
+    <loc>https://fratellofast.food/guide-street-food-hammamet.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fratellofast.food/secrets-pate-pizza-artisanale.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fratellofast.food/art-escalope-panee-maison.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fratellofast.food/plats-incontournables-tunisie.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pages Légales & Conformité AdSense / RGPD -->
+  <url>
+    <loc>https://fratellofast.food/politique-de-confidentialite.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://fratellofast.food/conditions-generales.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://fratellofast.food/mentions-legales.html</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>

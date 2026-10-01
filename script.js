@@ -780,6 +780,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  /* ------------------------------------------------------------------------
+     16. Cookie Consent Banner (Google AdSense & GDPR Compliance)
+     ------------------------------------------------------------------------ */
+  function initCookieConsent() {
+    const consent = localStorage.getItem('fratello_cookie_consent');
+    if (consent) return; // already accepted or refused
+
+    let banner = document.getElementById('cookie-consent');
+    if (!banner) {
+      // Create dynamically if not statically present in HTML
+      banner = document.createElement('div');
+      banner.id = 'cookie-consent';
+      banner.className = 'cookie-consent-banner';
+      banner.setAttribute('role', 'dialog');
+      banner.setAttribute('aria-live', 'polite');
+      banner.setAttribute('aria-label', 'Consentement aux cookies');
+      banner.innerHTML = `
+        <div class="cookie-consent-text">
+          <span data-fr="Ce site utilise des cookies techniques et des partenaires publicitaires (comme Google AdSense) pour mesurer l'audience et personnaliser les annonces. Consultez notre " data-en="This site uses technical cookies and advertising partners (such as Google AdSense) to measure audience and personalize ads. See our ">Ce site utilise des cookies techniques et des partenaires publicitaires (comme Google AdSense) pour mesurer l'audience et personnaliser les annonces. Consultez notre </span>
+          <a href="politique-de-confidentialite.html" data-fr="Politique de Confidentialité" data-en="Privacy Policy">Politique de Confidentialité</a>.
+        </div>
+        <div class="cookie-consent-actions">
+          <button id="cookie-accept" class="btn btn-yellow" data-fr="Accepter" data-en="Accept">Accepter</button>
+          <button id="cookie-refuse" class="btn btn-outline" data-fr="Refuser" data-en="Decline">Refuser</button>
+        </div>
+      `;
+      document.body.appendChild(banner);
+    }
+
+    setTimeout(() => {
+      banner.classList.add('show');
+    }, 1200);
+
+    const acceptBtn = banner.querySelector('#cookie-accept');
+    const refuseBtn = banner.querySelector('#cookie-refuse');
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        localStorage.setItem('fratello_cookie_consent', 'accepted');
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 400);
+      });
+    }
+
+    if (refuseBtn) {
+      refuseBtn.addEventListener('click', () => {
+        localStorage.setItem('fratello_cookie_consent', 'refused');
+        banner.classList.remove('show');
+        setTimeout(() => banner.remove(), 400);
+      });
+    }
+  }
+
+  initCookieConsent();
+
   // Initialize initial language (French default or saved language preference)
   setLanguage(currentLang);
 });

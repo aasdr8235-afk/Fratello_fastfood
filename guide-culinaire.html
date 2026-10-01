@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2087617868428041"
+     crossorigin="anonymous"></script>
+
+  <title data-fr="Guide Culinaire &amp; Street Food Hammamet | Fratello Fast Food" data-en="Culinary Guide &amp; Street Food Hammamet | Fratello Fast Food">Guide Culinaire &amp; Street Food Hammamet | Fratello Fast Food</title>
+  <meta name="description" content="Explorez le guide gourmand de Fratello Fast Food à Hammamet : articles sur la street food tunisienne, fabrication de la pâte à pizza fermentée 48h et secrets de l'escalope panée.">
+  <meta name="keywords" content="guide culinaire hammamet, street food hammamet, blog restaurant hammamet, pizza artisanale tunisie, tacos escalope hammamet">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#F6C12D">
+
+  <link rel="canonical" href="https://fratellofast.food/guide-culinaire.html">
+  <link rel="icon" type="image/png" href="assets/logo/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo/logo.png">
+
+  <!-- Early Theme Initialization -->
+  <script>
+    (function() {
+      var savedTheme = localStorage.getItem('fratello_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header id="main-navbar" class="navbar">
+    <div class="nav-container">
+      <div class="mobile-nav-grid">
+        <a href="tel:+21623445536" class="mobile-call-btn" aria-label="Appeler Fratello Fast Food">
+          <i data-lucide="phone"></i>
+        </a>
+        <a href="index.html" class="mobile-logo-link" aria-label="Fratello Fast Food Accueil">
+          <img src="assets/logo/logo.png" alt="Fratello Logo" class="nav-logo-img" width="48" height="48" decoding="async">
+        </a>
+        <button id="hamburger-btn" class="hamburger-btn" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="mobile-drawer">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+
+      <div class="desktop-nav-flex">
+        <a href="index.html" class="brand-logo-link" aria-label="Fratello Fast Food Accueil">
+          <img src="assets/logo/logo.png" alt="Fratello Logo" class="nav-logo-img" width="48" height="48" decoding="async">
+        </a>
+
+        <nav class="desktop-nav-links" aria-label="Navigation Principale">
+          <a href="index.html" class="nav-link" data-fr="Accueil" data-en="Home">Accueil</a>
+          <a href="index.html#menu" class="nav-link" data-fr="Menu" data-en="Menu">Menu</a>
+          <a href="guide-culinaire.html" class="nav-link active" data-fr="Guide Culinaire" data-en="Food Guide">Guide Culinaire</a>
+          <a href="a-propos.html" class="nav-link" data-fr="À Propos" data-en="About Us">À Propos</a>
+          <a href="index.html#location" class="nav-link" data-fr="Localisation" data-en="Location">Localisation</a>
+        </nav>
+
+        <div class="nav-cta-group">
+          <div class="lang-switcher" data-active="fr" role="radiogroup" aria-label="Sélecteur de langue">
+            <div class="lang-slider" aria-hidden="true"></div>
+            <button class="lang-btn active" data-lang="fr" role="radio" aria-checked="true" aria-label="Français">FR</button>
+            <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
+          </div>
+
+          <button class="theme-toggle" aria-label="Passer au mode clair">
+            <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+            <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+          </button>
+
+          <a href="tel:+21623445536" class="nav-phone-btn">
+            <i data-lucide="phone-call"></i>
+            <span>+216 23 445 536</span>
+          </a>
+
+          <a href="https://wa.me/21623445536" target="_blank" rel="noopener noreferrer" class="btn btn-yellow">
+            <i data-lucide="message-circle"></i>
+            <span data-fr="Commander" data-en="Order">Commander</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div id="mobile-drawer" class="mobile-drawer" aria-hidden="true">
+    <div class="drawer-overlay" id="drawer-overlay"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">
+        <img src="assets/logo/logo.png" alt="Fratello Logo" class="drawer-logo" width="80" height="80" decoding="async">
+        <div class="drawer-header-actions">
+          <div class="lang-switcher" data-active="fr" role="radiogroup" aria-label="Sélecteur de langue">
+            <div class="lang-slider" aria-hidden="true"></div>
+            <button class="lang-btn active" data-lang="fr" role="radio" aria-checked="true" aria-label="Français">FR</button>
+            <button class="lang-btn" data-lang="en" role="radio" aria-checked="false" aria-label="English">EN</button>
+          </div>
+          <button class="theme-toggle" aria-label="Passer au mode clair">
+            <i data-lucide="moon" class="theme-icon theme-icon-dark"></i>
+            <i data-lucide="sun" class="theme-icon theme-icon-light"></i>
+          </button>
+          <button id="drawer-close" class="drawer-close-btn" aria-label="Fermer le menu">
+            <i data-lucide="x"></i>
+          </button>
+        </div>
+      </div>
+      <nav class="drawer-links" aria-label="Menu mobile">
+        <a href="index.html" class="drawer-link">Accueil</a>
+        <a href="index.html#menu" class="drawer-link">Menu</a>
+        <a href="guide-culinaire.html" class="drawer-link active">Guide Culinaire</a>
+        <a href="a-propos.html" class="drawer-link">À Propos</a>
+        <a href="index.html#location" class="drawer-link">Localisation</a>
+      </nav>
+      <div class="drawer-footer">
+        <a href="https://wa.me/21623445536" target="_blank" rel="noopener noreferrer" class="btn btn-yellow w-full">
+          <i data-lucide="message-circle"></i> <span>WhatsApp Express</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <span class="section-tag">Le Mag Culinaire Fratello</span>
+        <h1 class="page-hero-title">Guide Culinaire &amp; Street Food à Hammamet</h1>
+        <p class="page-hero-subtitle">
+          Découvrez nos dossiers gourmands, nos conseils de dégustation et les coulisses du savoir-faire artisanal de Fratello Fast Food.
+        </p>
+      </div>
+    </section>
+
+    <div class="content-page-wrapper">
+      <div class="container">
+        <div class="guides-grid">
+          <!-- Guide Card 1 -->
+          <article class="guide-card">
+            <div class="guide-card-img-wrap">
+              <img src="assets/images/restaurant_storefront.png" alt="Façade du restaurant Fratello à Baraket Sahel Hammamet" loading="lazy" decoding="async">
+              <span class="guide-badge">Guide Street Food</span>
+            </div>
+            <div class="guide-card-body">
+              <span class="guide-card-date"><i data-lucide="clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 6 min de lecture</span>
+              <h2 class="guide-card-title">Guide Complet de la Street Food à Hammamet : Spécialités &amp; Bonnes Adresses</h2>
+              <p class="guide-card-excerpt">
+                De Baraket Sahel à Yasmine Hammamet, explorez les richesses de la cuisine rapide méditerranéenne en Tunisie et nos conseils pour savourer les meilleurs tacos et pizzas en vacances.
+              </p>
+              <a href="guide-street-food-hammamet.html" class="guide-card-link">
+                <span>Lire l'article complet</span> <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Guide Card 2 -->
+          <article class="guide-card">
+            <div class="guide-card-img-wrap">
+              <img src="assets/images/pizzduit.png" alt="Pizza artisanale au four chez Fratello" loading="lazy" decoding="async">
+              <span class="guide-badge">Secrets de Cuisine</span>
+            </div>
+            <div class="guide-card-body">
+              <span class="guide-card-date"><i data-lucide="clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 5 min de lecture</span>
+              <h2 class="guide-card-title">Les Secrets d'une Pâte à Pizza Parfaite : Fermentation Lente de 48h &amp; Cuisson au Four</h2>
+              <p class="guide-card-excerpt">
+                Pourquoi la patience transforme une simple pâte en une merveille croustillante, alvéolée et légère pour l'estomac. Les secrets techniques de nos pizzaïolos.
+              </p>
+              <a href="secrets-pate-pizza-artisanale.html" class="guide-card-link">
+                <span>Lire l'article complet</span> <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Guide Card 3 -->
+          <article class="guide-card">
+            <div class="guide-card-img-wrap">
+              <img src="assets/images/escalope_champignon.png" alt="Escalope croustillante en sauce" loading="lazy" decoding="async">
+              <span class="guide-badge">Spécialité Maison</span>
+            </div>
+            <div class="guide-card-body">
+              <span class="guide-card-date"><i data-lucide="clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 5 min de lecture</span>
+              <h2 class="guide-card-title">L'Escalope Panée Maison : Du Choix des Volailles à la Panure Croustillante Fratello</h2>
+              <p class="guide-card-excerpt">
+                Filets frais entiers, marinade aux épices douces et panure à l'anglaise dorée minute : découvrez la recette secrète qui sublime nos tacos et nos sandwichs.
+              </p>
+              <a href="art-escalope-panee-maison.html" class="guide-card-link">
+                <span>Lire l'article complet</span> <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Guide Card 4 -->
+          <article class="guide-card">
+            <div class="guide-card-img-wrap">
+              <img src="assets/images/tacos_double.png" alt="Tacos double garni de fromage fondu" loading="lazy" decoding="async">
+              <span class="guide-badge">Culture Culinaire</span>
+            </div>
+            <div class="guide-card-body">
+              <span class="guide-card-date"><i data-lucide="clock" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px;"></i> 6 min de lecture</span>
+              <h2 class="guide-card-title">Tacos, Makloub, Ojja &amp; Panuozzo : Les Plats Incontournables en Tunisie</h2>
+              <p class="guide-card-excerpt">
+                Un tour d'horizon savoureux des plats emblématiques de la restauration rapide tunisienne, fusionnant influences italiennes, françaises et orientales.
+              </p>
+              <a href="plats-incontournables-tunisie.html" class="guide-card-link">
+                <span>Lire l'article complet</span> <i data-lucide="arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-col brand-col">
+          <a href="index.html" class="footer-logo-link">
+            <img src="assets/logo/logo.png" alt="Fratello Fast Food Logo" class="footer-logo" width="48" height="48" decoding="async">
+            <span class="footer-brand-name">FRATELLO</span>
+          </a>
+          <p class="footer-tagline">
+            Destination fast food artisanale authentique à Hammamet. Escalope panée maison, pizzas cuites au four et tacos garnis.
+          </p>
+          <address class="footer-address">
+            <i data-lucide="map-pin"></i> Route Nationale 1, Baraket Sahel, Hammamet 8056, Tunisie<br>
+            <i data-lucide="phone"></i> +216 23 445 536<br>
+            <i data-lucide="clock"></i> Ouvert 7j/7: 10h00 – 02h00
+          </address>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="index.html#menu">Menu Vitrine</a></li>
+            <li><a href="https://menu.fratellofast.food/" target="_blank" rel="noopener noreferrer">Menu Digital Officiel ↗</a></li>
+            <li><a href="guide-culinaire.html" class="active">Guide Culinaire</a></li>
+            <li><a href="a-propos.html">À Propos de Nous</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-heading">Informations Légales</h4>
+          <ul class="footer-links">
+            <li><a href="politique-de-confidentialite.html">Politique de Confidentialité</a></li>
+            <li><a href="conditions-generales.html">Conditions d'Utilisation</a></li>
+            <li><a href="mentions-legales.html">Mentions Légales</a></li>
+            <li><a href="index.html#faq">FAQ &amp; Guide</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p class="copyright">&copy; 2026 Fratello Fast Food. Tous droits réservés.</p>
+        <p class="creator-credit">Créé par <a href="https://www.instagram.com/mh_mouhib/" target="_blank" rel="noopener noreferrer" class="credit-link">MouhibMH</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
